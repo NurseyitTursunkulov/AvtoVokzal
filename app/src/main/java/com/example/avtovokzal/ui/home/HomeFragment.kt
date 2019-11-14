@@ -1,6 +1,7 @@
 package com.example.avtovokzal.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.avtovokzal.R
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -32,12 +35,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("Nurs","${FirebaseAuth.getInstance().currentUser}")
         view.findViewById<View>(R.id.button_home).setOnClickListener {
             val action = HomeFragmentDirections
                     .actionHomeFragmentToHomeSecondFragment("From HomeFragment")
             NavHostFragment.findNavController(this@HomeFragment)
                     .navigate(action)
+        }
+        button.setOnClickListener {
+            NavHostFragment.findNavController(this@HomeFragment)
+                .navigate(HomeFragmentDirections.actionNavHomeToAuthFragment())
         }
     }
 }

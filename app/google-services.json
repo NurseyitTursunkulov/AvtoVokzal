@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "122268769728",
+    "firebase_url": "https://avtovokzal-ceb37.firebaseio.com",
+    "project_id": "avtovokzal-ceb37",
+    "storage_bucket": "avtovokzal-ceb37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122268769728:android:3598551e56041b0e887c25",
+        "android_client_info": {
+          "package_name": "com.example.avtovokzal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122268769728-rjkj0htdsuihh7c0gjkvqehbb03f7hn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.avtovokzal",
+            "certificate_hash": "b7b056e1b1ffec3eed9e60fe43d6adce9c3cb0a2"
+          }
+        },
+        {
+          "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGzoQ78fqQYf2lSIIkB14Gp4sYHbwX-Qw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
