@@ -56,5 +56,9 @@
         android:id="@+id/mapsFragment"
         android:name="com.example.avtovokzal.ui.gallery.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+    </fragment>
 </navigation>

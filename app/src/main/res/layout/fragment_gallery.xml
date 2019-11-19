@@ -10,56 +10,125 @@
         android:id="@+id/fromTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="откуда"
-        app:layout_constraintEnd_toEndOf="@+id/toTV"
-        app:layout_constraintStart_toStartOf="@+id/toTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toTV" />
 
     <AutoCompleteTextView
         android:id="@+id/toTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="куда"
-        app:layout_constraintBottom_toTopOf="@+id/fromTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/calendarBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="дата"
-        app:layout_constraintEnd_toEndOf="@+id/fromTV"
-        app:layout_constraintStart_toStartOf="@+id/fromTV"
-        app:layout_constraintTop_toBottomOf="@+id/fromTV" />
 
     <Button
         android:id="@+id/location_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ваше местоположение"
-        app:layout_constraintEnd_toEndOf="@+id/calendarBtn"
-        app:layout_constraintStart_toStartOf="@+id/calendarBtn"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumber"
         app:layout_constraintTop_toBottomOf="@+id/calendarBtn" />
 
     <Button
-        android:id="@+id/publicate_button"
+        android:id="@+id/driving_licience_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="опубликовать"
+        android:text="сфотографировать права"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <Button
+        android:id="@+id/calendarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="дата"
+        app:layout_constraintBottom_toTopOf="@+id/location_button"
         app:layout_constraintEnd_toEndOf="@+id/location_button"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/location_button"
+        app:layout_constraintTop_toBottomOf="@+id/fromTV" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(это повысит ваш рейтинг)"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/driving_licience_btn" />
+
+    <Button
+        android:id="@+id/publicate_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="опубликовать"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fromTV"
+        app:layout_constraintStart_toStartOf="@+id/fromTV"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="161dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:hint="цена"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/driving_licience_btn"
+        app:layout_constraintStart_toStartOf="@+id/driving_licience_btn"
         app:layout_constraintTop_toBottomOf="@+id/location_button" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:text="сом"
+        android:textSize="36sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toEndOf="@+id/driving_licience_btn"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="calendarBtn,fromTV,toTV,location_button,publicate_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="editTextNumber"
+        tools:layout_editor_absoluteX="73dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/publicate_button"
+        app:layout_constraintEnd_toEndOf="@+id/publicate_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/publicate_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:src="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

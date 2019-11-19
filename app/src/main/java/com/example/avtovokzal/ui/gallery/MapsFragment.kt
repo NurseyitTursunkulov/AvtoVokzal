@@ -3,17 +3,20 @@ package com.example.avtovokzal.ui.gallery
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
-import com.example.avtovokzal.ui.gallery.util.checkLocationPermission
-import com.example.avtovokzal.ui.gallery.util.displayOnMapLocation
-import com.example.avtovokzal.ui.gallery.util.getLocation
-import com.example.avtovokzal.ui.gallery.util.checkOnRequestPermissionsResult
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.example.avtovokzal.ui.gallery.util.*
+import com.example.permissionlib.onRequestPermissionsResult
 
 import com.google.android.gms.maps.SupportMapFragment
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_maps.*
 
 class MapsFragment : Fragment() {
 
@@ -30,8 +33,13 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+
+        (activity as MainActivity).fab.visibility = View.INVISIBLE
+        okFab.setOnClickListener {
+            navigateToGalleryFragment(view)
+        }
         checkLocationPermission(
-            onGranted = { getLocation(mapFragment, ::displayOnMapLocation) }
+            onGranted = { requestLocation(mapFragment, ::displayOnMapLocation) }
         )
     }
 
@@ -40,10 +48,19 @@ class MapsFragment : Fragment() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        checkOnRequestPermissionsResult(requestCode, grantResults,
+        Log.d("Nurs", "onRequestPermissionsResult")
+        onRequestPermissionsResult(
+            requestCodeFromSystem = requestCode,
+            grantResults = grantResults,
             onGranted = {
-                getLocation(mapFragment, ::displayOnMapLocation)
-            })
+                requestLocation(mapFragment, ::displayOnMapLocation)
+            },
+            requestCode = MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
+        )
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        (activity as MainActivity).fab.visibility = View.VISIBLE
+    }
 }

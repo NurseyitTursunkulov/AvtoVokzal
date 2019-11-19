@@ -10,8 +10,12 @@ import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.example.avtovokzal.R
 import com.example.avtovokzal.ui.gallery.MapsFragment
+import com.example.avtovokzal.ui.gallery.MapsFragmentDirections
+import com.example.permissionlib.checkPermission
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,7 +25,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
-internal val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
+ val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
 
 fun MapsFragment.displayOnMapLocation(
     googleMap: GoogleMap?,
@@ -57,6 +61,7 @@ fun MapsFragment.displayOnMapLocation(
             imgLocationPinUp?.visibility = View.GONE
             // customizing map marker with a custom icon
             // and place it on the current map camera position
+            Log.d("Nurs" , "location ${cameraPosition.target}")
             val markerOptions = MarkerOptions().position(cameraPosition.target)
                 .icon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_baseline_emoji_people_24))
             addMarker(markerOptions)
@@ -73,8 +78,8 @@ private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): Bitm
     }
 }
 
-fun MapsFragment.getLocation(mapFragment: SupportMapFragment?,
-                onLocationRecieved: (m: GoogleMap, location: Location) -> Unit)
+fun MapsFragment.requestLocation(mapFragment: SupportMapFragment?,
+                                 onLocationRecieved: (m: GoogleMap, location: Location) -> Unit)
 {
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     fusedLocationClient.lastLocation
@@ -94,69 +99,19 @@ fun MapsFragment.getLocation(mapFragment: SupportMapFragment?,
         }
 }
 
- fun MapsFragment.checkLocationPermission(onGranted: () -> Unit) {
-    if (ContextCompat.checkSelfPermission(
-            requireActivity(),
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-        != PackageManager.PERMISSION_GRANTED
-    ) {
-        Log.d("Nurs", "not granted")
-        // Permission is not granted
-        // Should we show an explanation?
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        ) {
-            Log.d("Nurs", " show an explanation ")
-            // Show an explanation to the user *asynchronously* -- don't block
-            // this thread waiting for the user's response! After the user
-            // sees the explanation, try again to request the permission.
-        } else {
-            // No explanation needed, we can request the permission.
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
-            )
-            Log.d("Nurs", "  request the permission")
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
-        }
-    } else {
-        // Permission has already been granted
-        Log.d("Nurs", "else")
-        onGranted()
-    }
+fun MapsFragment.checkLocationPermission(onGranted: () -> Unit){
+    checkPermission(
+        fragment = this,
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        requestCode = MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION,
+        onGranted = { onGranted() }
+    )
 }
 
-fun MapsFragment.checkOnRequestPermissionsResult(
-    requestCode: Int,
-    grantResults: IntArray,
-    onGranted: () -> Unit) {
-    when (requestCode) {
-        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION -> {
-            // If request is cancelled, the result arrays are empty.
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                // permission was granted, yay! Do the
-                // contacts-related task you need to do.
-                Log.d("Nurs", "onRequestPermissionsResult")
-                onGranted()
-            } else {
-                // permission denied, boo! Disable the
-                // functionality that depends on this permission.
-                Log.d("Nurs", "onRequestPermissionsResult else ")
+ fun MapsFragment.navigateToGalleryFragment(view: View) {
+    NavHostFragment.findNavController(this)
+        .navigate(MapsFragmentDirections.actionMapsFragmentToNavGallery())
 
-            }
-            return
-        }
-
-        // Add other 'when' lines to check for other
-        // permissions this app might request.
-        else -> {
-            // Ignore all other requests.
-        }
-    }
+    val controller = Navigation.findNavController(view)
+    controller.popBackStack(R.id.mapsFragment, true)
 }
