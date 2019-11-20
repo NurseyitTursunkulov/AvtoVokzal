@@ -29,7 +29,81 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAGzoQ78fqQYf2lSIIkB14Gp4sYHbwX-Qw"
+          "current_key": "AIzaSyCV0iryWUjrF35C0K7fAdDNa_ttIOXw4iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122268769728:android:05413156d2101609887c25",
+        "android_client_info": {
+          "package_name": "com.example.barcodecamerax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122268769728-5lg1qbr24miot4prupbhikkbpip23ehd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barcodecamerax",
+            "certificate_hash": "b7b056e1b1ffec3eed9e60fe43d6adce9c3cb0a2"
+          }
+        },
+        {
+          "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV0iryWUjrF35C0K7fAdDNa_ttIOXw4iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122268769728:android:79d8e3c08727b052887c25",
+        "android_client_info": {
+          "package_name": "com.google.firebase.ml.md"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122268769728-9k369u7efkfgie2scjs6l5a251g23d3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.ml.md",
+            "certificate_hash": "b7b056e1b1ffec3eed9e60fe43d6adce9c3cb0a2"
+          }
+        },
+        {
+          "client_id": "122268769728-63p6vhr5pcnch7tr01f5fv09vt8qauj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV0iryWUjrF35C0K7fAdDNa_ttIOXw4iw"
         }
       ],
       "services": {
