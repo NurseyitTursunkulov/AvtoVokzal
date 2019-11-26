@@ -2,13 +2,11 @@ package com.example.avtovokzal.ui.gallery.util
 
 import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -27,10 +25,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
  val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
 
-fun MapsFragment.displayOnMapLocation(
+fun MapsFragment.displayOnMap(
     googleMap: GoogleMap?,
     location: Location,
-    onLocationSelected:(LatLng)->Unit
+    onNewLocationSelected:(LatLng)->Unit
 ) {
     googleMap?.apply {
             isMyLocationEnabled = true
@@ -66,7 +64,7 @@ fun MapsFragment.displayOnMapLocation(
             val markerOptions = MarkerOptions().position(cameraPosition.target)
                 .icon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_baseline_emoji_people_24))
             addMarker(markerOptions)
-            onLocationSelected(cameraPosition.target)
+            onNewLocationSelected(cameraPosition.target)
         }
     }
 }

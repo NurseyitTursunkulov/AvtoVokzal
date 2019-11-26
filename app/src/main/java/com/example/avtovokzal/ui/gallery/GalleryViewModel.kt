@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.avtovokzal.ui.gallery.util.DateModel
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -14,33 +15,27 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class GalleryViewModel : ViewModel() {
-    val date = MutableLiveData<Date>()
+    val advertModel = AdvertModel()
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
         val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-        sfd.format(Date( year,month,day,hour,min))
-        date.postValue(Date( year,month,day,hour,min))
+        sfd.format(Date(year, month, day, hour, min))
+        Log.d("Nurs", sfd.format(Date(year, month, day, hour, min)))
+        advertModel.date.postValue(Date(year, month, day, hour, min))
     }
 
-    fun publicateAdd(){
+    fun publicateAdd() {
         val db = FirebaseFirestore.getInstance()
-
-// Create a new user with a first and last name
-        val user = hashMapOf(
-            "first" to "Ada",
-            "last" to "Lovelace",
-            "born" to 1815
-        )
-
-// Add a new document with a generated ID
         db.collection("users")
-            .add(user)
+            .add(advertModel)
             .addOnSuccessListener { documentReference ->
+
                 Log.d("Nurs", "DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
                 Log.w("Nurs", "Error adding document", e)
             }
     }
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"
     }

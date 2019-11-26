@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
 import com.example.avtovokzal.ui.gallery.util.*
@@ -34,7 +32,6 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-
         (activity as MainActivity).fab.visibility = View.INVISIBLE
         okFab.setOnClickListener {
             navigateToGalleryFragment(view)
@@ -42,7 +39,11 @@ class MapsFragment : Fragment() {
         checkLocationPermission(
             onGranted = {
                 requestLocation(mapFragment) { googleMap, location ->
-                    displayOnMapLocation(googleMap,location,onLocationSelected = {})
+                    displayOnMap(googleMap, location,
+                        onNewLocationSelected = { newLocation ->
+                            galleryViewModel.advertModel.location.postValue(newLocation)
+                        }
+                    )
                 }
             }
         )
@@ -58,8 +59,12 @@ class MapsFragment : Fragment() {
             requestCodeFromSystem = requestCode,
             grantResults = grantResults,
             onGranted = {
-                requestLocation(mapFragment) { a, b ->
-                    displayOnMapLocation(a,b,{})
+                requestLocation(mapFragment) { googleMap, location ->
+                    displayOnMap(googleMap, location,
+                        onNewLocationSelected = { newLocation ->
+                            galleryViewModel.advertModel.location.postValue(newLocation)
+                        }
+                    )
                 }
             },
             requestCode = MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
