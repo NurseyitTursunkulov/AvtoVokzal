@@ -29,7 +29,8 @@ import kotlinx.android.synthetic.main.fragment_maps.*
 
 fun MapsFragment.displayOnMapLocation(
     googleMap: GoogleMap?,
-    location: Location
+    location: Location,
+    onLocationSelected:(LatLng)->Unit
 ) {
     googleMap?.apply {
             isMyLocationEnabled = true
@@ -65,6 +66,7 @@ fun MapsFragment.displayOnMapLocation(
             val markerOptions = MarkerOptions().position(cameraPosition.target)
                 .icon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_baseline_emoji_people_24))
             addMarker(markerOptions)
+            onLocationSelected(cameraPosition.target)
         }
     }
 }

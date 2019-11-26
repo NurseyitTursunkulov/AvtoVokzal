@@ -17,11 +17,12 @@ import com.example.permissionlib.onRequestPermissionsResult
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_maps.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class MapsFragment : Fragment() {
 
     internal var mapFragment: SupportMapFragment? = null
-
+    val galleryViewModel: GalleryViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +40,11 @@ class MapsFragment : Fragment() {
             navigateToGalleryFragment(view)
         }
         checkLocationPermission(
-            onGranted = { requestLocation(mapFragment, ::displayOnMapLocation) }
+            onGranted = {
+                requestLocation(mapFragment) { googleMap, location ->
+                    displayOnMapLocation(googleMap,location,onLocationSelected = {})
+                }
+            }
         )
     }
 
@@ -53,7 +58,9 @@ class MapsFragment : Fragment() {
             requestCodeFromSystem = requestCode,
             grantResults = grantResults,
             onGranted = {
-                requestLocation(mapFragment, ::displayOnMapLocation)
+                requestLocation(mapFragment) { a, b ->
+                    displayOnMapLocation(a,b,{})
+                }
             },
             requestCode = MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
         )

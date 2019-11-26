@@ -9,27 +9,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.avtovokzal.databinding.FragmentGalleryBinding
 import com.example.avtovokzal.ui.gallery.util.*
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 //import com.example.permissionlib.checkCameraPermission
 import com.example.permissionlib.onRequestPermissionsResult
 import com.example.avtovokzal.R as T
 import kotlinx.android.synthetic.main.fragment_gallery.*
+import org.koin.android.viewmodel.ext.android.getSharedViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class GalleryFragment : Fragment() {
 
-    internal lateinit var galleryViewModel: GalleryViewModel
+    val galleryViewModel: GalleryViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-            ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        return inflater.inflate(T.layout.fragment_gallery, container, false)
+        val binding = inflate<FragmentGalleryBinding>(inflater, T.layout.fragment_gallery, container, false)
+        binding.viewModel = galleryViewModel
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +44,7 @@ class GalleryFragment : Fragment() {
         calendarBtn.setOnClickListener {
             selectTime(
                 ontimeSelected = { year: Int, month: Int, day: Int, hour: Int, min: Int ->
-
+                    galleryViewModel.onTimeSelected(year,month,day,hour,min)
                 }
             )
         }
@@ -73,6 +79,7 @@ class GalleryFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             imageView2.setImageBitmap(imageBitmap)
+
         }
     }
 }
