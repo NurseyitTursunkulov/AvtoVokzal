@@ -4,18 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.avtovokzal.postAnAdd.Result
+import com.example.avtovokzal.postAnAdd.SendingAdert
 import com.example.avtovokzal.ui.gallery.util.DateModel
-import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GalleryViewModel : ViewModel() {
+class GalleryViewModel(val sendAdvert: SendingAdert) : ViewModel() {
+    private val _snackBar = MutableLiveData<String>()
+    private val _spinner = MutableLiveData<Boolean>()
     val advertModel = AdvertModel()
+
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
         val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
         sfd.format(Date(year, month, day, hour, min))
@@ -24,16 +26,15 @@ class GalleryViewModel : ViewModel() {
     }
 
     fun publicateAdd() {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("users")
-            .add(advertModel)
-            .addOnSuccessListener { documentReference ->
-
-                Log.d("Nurs", "DocumentSnapshot added with ID: ${documentReference.id}")
+        launchDataLoad{
+            sendAdvert.sendAdvert(advertModel).let { result: Result<Unit> ->
+                when (result) {
+                    is Result.Success -> Log.d("Nurs", "success $result")
+                    is Result.Error -> Log.d("Nurs", "error $result")
+                    is Result.Loading -> Log.d("Nurs", "loading $result")
+                }
             }
-            .addOnFailureListener { e ->
-                Log.w("Nurs", "Error adding document", e)
-            }
+        }
     }
 
     private val _text = MutableLiveData<String>().apply {
@@ -41,5 +42,16 @@ class GalleryViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
     val time = MutableLiveData<DateModel>()
-
+    private fun launchDataLoad(block: suspend () -> Unit): Job {
+        return viewModelScope.launch {
+            try {
+                _spinner.value = true
+                block()
+            } catch (error: Error) {
+                _snackBar.value = error.message
+            } finally {
+                _spinner.value = false
+            }
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.avtovokzal
 
 import android.app.Application
+import com.example.avtovokzal.postAnAdd.SendAdvertImpl
+import com.example.avtovokzal.postAnAdd.SendingAdert
 import com.example.avtovokzal.ui.gallery.GalleryViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -36,7 +38,8 @@ val myModule : Module = module {
 
     // ViewModel instance of MyViewModel
     // get() will resolve Repository instance
-    viewModel{ GalleryViewModel() }
+    viewModel{ GalleryViewModel(get()) }
+    single<SendingAdert> { SendAdvertImpl() }
 
     // Single instance of Repository
 //    single<Repository> { MyRepository() }
