@@ -1,17 +1,10 @@
 package com.example.avtovokzal.postAnAdd
 
 import kotlinx.coroutines.tasks.await
-import kotlin.coroutines.resume
 import android.util.Log
+import com.example.avtovokzal.domain.SendingAdert
 import com.example.avtovokzal.ui.gallery.AdvertModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 
 class SendAdvertImpl() : SendingAdert {
 

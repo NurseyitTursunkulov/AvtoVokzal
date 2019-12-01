@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avtovokzal.postAnAdd.Result
-import com.example.avtovokzal.postAnAdd.SendingAdert
+import com.example.avtovokzal.domain.SendingAdert
 import com.example.avtovokzal.ui.gallery.util.DateModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -16,6 +16,7 @@ import java.util.*
 class GalleryViewModel(val sendAdvert: SendingAdert) : ViewModel() {
     private val _snackBar = MutableLiveData<String>()
     private val _spinner = MutableLiveData<Boolean>()
+    val spinner = MutableLiveData<Boolean>()
     val advertModel = AdvertModel()
 
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
@@ -26,12 +27,12 @@ class GalleryViewModel(val sendAdvert: SendingAdert) : ViewModel() {
     }
 
     fun publicateAdd() {
-        launchDataLoad{
+        launchDataLoad {
             sendAdvert.sendAdvert(advertModel).let { result: Result<Unit> ->
-                when (result) {
-                    is Result.Success -> Log.d("Nurs", "success $result")
-                    is Result.Error -> Log.d("Nurs", "error $result")
-                    is Result.Loading -> Log.d("Nurs", "loading $result")
+                if (result is Result.Success) {
+
+                } else {
+
                 }
             }
         }

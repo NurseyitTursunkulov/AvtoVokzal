@@ -2,7 +2,7 @@ package com.example.avtovokzal
 
 import android.app.Application
 import com.example.avtovokzal.postAnAdd.SendAdvertImpl
-import com.example.avtovokzal.postAnAdd.SendingAdert
+import com.example.avtovokzal.domain.SendingAdert
 import com.example.avtovokzal.ui.gallery.GalleryViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
