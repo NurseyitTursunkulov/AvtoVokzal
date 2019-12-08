@@ -72,6 +72,7 @@ dependencies {
     implementation ("com.google.android.gms:play-services-location:17.0.0")
     implementation ("com.google.android.material:material:1.2.0-alpha02")
     implementation (project(":permissionlib"))
+    implementation (project(":core"))
 
     // Koin for Kotlin apps
     implementation ("org.koin:koin-android:2.0.1")
@@ -79,6 +80,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-database:19.2.0")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.2")
 }

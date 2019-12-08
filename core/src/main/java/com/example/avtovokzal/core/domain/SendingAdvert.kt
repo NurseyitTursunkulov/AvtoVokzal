@@ -1,8 +1,7 @@
-package com.example.avtovokzal.domain
+package com.example.avtovokzal.core.domain
 
 import com.example.avtovokzal.postAnAdd.Result
-import com.example.avtovokzal.ui.gallery.AdvertModel
 
-interface SendingAdert {
+interface SendingAdvert {
     suspend fun sendAdvert(advertModel: AdvertModel) : Result<Unit>
 }

@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.postAnAdd.Result
-import com.example.avtovokzal.domain.SendingAdert
+import com.example.avtovokzal.core.domain.SendingAdvert
 import com.example.avtovokzal.ui.gallery.util.DateModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GalleryViewModel(val sendAdvert: SendingAdert) : ViewModel() {
+class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
     private val _snackBar = MutableLiveData<String>()
     private val _spinner = MutableLiveData<Boolean>()
     val spinner = MutableLiveData<Boolean>()

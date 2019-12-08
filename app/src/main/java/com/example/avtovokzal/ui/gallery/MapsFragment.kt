@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
+import com.example.avtovokzal.core.domain.MyLatLng
 import com.example.avtovokzal.ui.gallery.util.*
 import com.example.permissionlib.onRequestPermissionsResult
 
@@ -41,7 +42,8 @@ class MapsFragment : Fragment() {
                 requestLocation(mapFragment) { googleMap, location ->
                     displayOnMap(googleMap, location,
                         onNewLocationSelected = { newLocation ->
-                            galleryViewModel.advertModel.location.postValue(newLocation)
+                            galleryViewModel.advertModel.location
+                                .postValue(MyLatLng(newLocation.latitude,newLocation.longitude))
                         }
                     )
                 }
@@ -62,7 +64,8 @@ class MapsFragment : Fragment() {
                 requestLocation(mapFragment) { googleMap, location ->
                     displayOnMap(googleMap, location,
                         onNewLocationSelected = { newLocation ->
-                            galleryViewModel.advertModel.location.postValue(newLocation)
+                            galleryViewModel.advertModel.location
+                                .postValue(MyLatLng(newLocation.latitude,newLocation.longitude))
                         }
                     )
                 }
