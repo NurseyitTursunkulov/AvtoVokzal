@@ -1,6 +1,7 @@
 package com.example.avtovokzal.ui.gallery.util
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -16,6 +17,7 @@ import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.checkPermission
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_gallery.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun GalleryFragment.selectTime(ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
@@ -105,6 +107,11 @@ fun GalleryFragment.showProgressBar(state: Boolean) {
         calendarBtn.isEnabled = true
         publicate_button.isEnabled = true
     }
+}
+ @SuppressLint("SimpleDateFormat")
+ fun GalleryFragment.showSelectedDate(it: Date?) {
+    dateTV.visibility = View.VISIBLE
+    dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
 }
 
 

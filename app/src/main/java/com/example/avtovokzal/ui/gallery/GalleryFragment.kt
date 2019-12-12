@@ -6,6 +6,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.viewmodel.ext.android.getSharedViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
+import java.util.*
 import com.example.avtovokzal.R as T
 
 
@@ -62,10 +64,17 @@ class GalleryFragment : Fragment() {
             showProgressBar(state)
         })
         galleryViewModel.advertModel.date.observe(this, Observer {
-            dateTV.visibility = View.VISIBLE
-            dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
+            showSelectedDate(it)
         })
+        galleryViewModel.advertModel.address.observe(this, EventObserver {
+            adressTV.visibility = View.VISIBLE
+            adressTV.text = it
+            Log.d("Nurs",it +"recieved")
+        })
+
     }
+
+
 
     val REQUEST_IMAGE_CAPTURE = 1
 

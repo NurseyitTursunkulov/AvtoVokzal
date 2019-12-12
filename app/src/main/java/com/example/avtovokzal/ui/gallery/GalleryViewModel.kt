@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.core.domain.postAnAdd.Result
 import com.example.avtovokzal.core.domain.SendingAdvert
-import com.example.avtovokzal.ui.gallery.util.DateModel
 import com.example.avtovokzal.util.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -21,12 +20,11 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
     val dialog = _dialog
     private val _spinner = MutableLiveData<Boolean>()
     val spinner =_spinner
-    val advertModel = AdvertModel()
+    val advertModel = AdvertModelPresenterLevel()
     private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
-    val time = MutableLiveData<DateModel>()
 
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
         val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
@@ -37,7 +35,7 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
 
     fun publicateAdd() {
         launchDataLoad {
-            sendAdvert.sendAdvert(advertModel).let { result: Result<Unit> ->
+            sendAdvert.sendAdvert(advertModel.convertToDomainModel()).let { result: Result<Unit> ->
                 if (result is Result.Success) {
                     _dialog.postValue(Event("ваше обьявление успешно опубликовано"))
                 } else {

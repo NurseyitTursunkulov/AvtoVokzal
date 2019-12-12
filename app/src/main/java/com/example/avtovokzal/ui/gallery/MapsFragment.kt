@@ -1,7 +1,6 @@
 package com.example.avtovokzal.ui.gallery
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
-import com.example.avtovokzal.core.domain.MyLatLng
 import com.example.avtovokzal.ui.gallery.util.*
+import com.example.avtovokzal.util.Event
 import com.example.permissionlib.onRequestPermissionsResult
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+
 
 class MapsFragment : Fragment() {
 
@@ -52,7 +53,11 @@ class MapsFragment : Fragment() {
                 displayOnMap(map, location,
                     onNewLocationSelected = { newLocation ->
                         galleryViewModel.advertModel.location
-                            .postValue(MyLatLng(newLocation.latitude, newLocation.longitude))
+                            .postValue(LatLng(newLocation.latitude, newLocation.longitude))
+
+                        getAdress(newLocation)?.let { address ->
+                            galleryViewModel.advertModel.address.postValue(Event(address))
+                        }
                     }
                 )
             }

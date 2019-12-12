@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import java.util.*
 
 data class AdvertModel(
-    val price: MutableLiveData<String> = MutableLiveData(),
-    val location: MutableLiveData<MyLatLng> = MutableLiveData(),
-    val fromCity: MutableLiveData<String> = MutableLiveData(),
-    val toCity: MutableLiveData<String> = MutableLiveData(),
-    val date: MutableLiveData<Date> = MutableLiveData()
+    val price: String?,
+    val location:MyLatLng?,
+    val address:String?,
+    val fromCity:String?,
+    val toCity: String?,
+    val date: Date?
 )
 
-data class MyLatLng(val longtitute: Double, val langtitute: Double)
+data class MyLatLng( val langtitute: Double?,val longtitute: Double?)

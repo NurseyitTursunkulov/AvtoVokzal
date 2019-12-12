@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.util.Log
 import android.view.View
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -75,6 +78,30 @@ fun MapsFragment.displayOnMap(
     }
 }
 
+fun MapsFragment.getAdress(newLocation: LatLng):String? {
+    val geocoder = Geocoder(requireContext(), Locale.getDefault())
+    var addresses: List<Address> = emptyList()
+    try {
+        addresses = geocoder.getFromLocation(
+            newLocation.latitude,
+            newLocation.longitude,
+            // In this sample, we get just a single address.
+            2
+        )
+    } catch (ioException: Exception) {
+
+    }
+
+    // Handle case where no address was found.
+    return if (addresses.isNotEmpty()) {
+        val address = addresses[0]
+            .getAddressLine(0)
+        address
+    } else{
+        null
+    }
+}
+
 private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
     return ContextCompat.getDrawable(context, vectorResId)?.run {
         setBounds(0, 0, intrinsicWidth, intrinsicHeight)
@@ -120,4 +147,13 @@ suspend fun SupportMapFragment.getMap(): GoogleMap {
             continuation.resume(result)
         }
     }
+}
+
+object Constants {
+    const val SUCCESS_RESULT = 0
+    const val FAILURE_RESULT = 1
+    const val PACKAGE_NAME = "com.google.android.gms.location.sample.locationaddress"
+    const val RECEIVER = "$PACKAGE_NAME.RECEIVER"
+    const val RESULT_DATA_KEY = "${PACKAGE_NAME}.RESULT_DATA_KEY"
+    const val LOCATION_DATA_EXTRA = "${PACKAGE_NAME}.LOCATION_DATA_EXTRA"
 }
