@@ -23,7 +23,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
- val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
+val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
 
 fun MapsFragment.displayOnMap(
     googleMap: GoogleMap?,
@@ -78,26 +84,18 @@ private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): Bitm
     }
 }
 
-fun MapsFragment.requestLocation(mapFragment: SupportMapFragment?,
-                                 onLocationRecieved: (m: GoogleMap, location: Location) -> Unit)
-{
-    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-    fusedLocationClient.lastLocation
-        .addOnSuccessListener { location: Location? ->
-            // Got last known location. In some rare situations this can be null.
-            Log.d("Nurs", "$location")
-            location?.let {
-                mapFragment?.getMapAsync { googleMap : GoogleMap ->
-                    onLocationRecieved(
-                        googleMap, location
-                    )
-                }
+suspend fun MapsFragment.requestLocation()=
+    suspendCancellableCoroutine{ continuation : CancellableContinuation<Location?> ->
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                continuation.resume(location)
             }
-        }
-        .addOnCompleteListener {
-            Log.d("Nurs", "map ${it.result}")
-        }
-}
+            .addOnFailureListener {
+                continuation.resumeWithException(it)
+            }
+    }
+
 
 fun MapsFragment.checkLocationPermission(onGranted: () -> Unit){
     checkPermission(
@@ -114,4 +112,12 @@ fun MapsFragment.checkLocationPermission(onGranted: () -> Unit){
 
     val controller = Navigation.findNavController(view)
     controller.popBackStack(R.id.mapsFragment, true)
+}
+
+suspend fun SupportMapFragment.getMap(): GoogleMap {
+    return kotlin.coroutines.suspendCoroutine { continuation ->
+        getMapAsync { result: GoogleMap ->
+            continuation.resume(result)
+        }
+    }
 }

@@ -4,7 +4,6 @@ import kotlinx.coroutines.tasks.await
 import android.util.Log
 import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.core.domain.SendingAdvert
-import com.example.avtovokzal.postAnAdd.Result
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SendAdvertImpl() : SendingAdvert {

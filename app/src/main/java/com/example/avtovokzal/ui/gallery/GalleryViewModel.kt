@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avtovokzal.core.domain.AdvertModel
-import com.example.avtovokzal.postAnAdd.Result
+import com.example.avtovokzal.core.domain.postAnAdd.Result
 import com.example.avtovokzal.core.domain.SendingAdvert
 import com.example.avtovokzal.ui.gallery.util.DateModel
 import kotlinx.coroutines.Job

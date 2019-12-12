@@ -1,21 +1,21 @@
 package com.example.avtovokzal.ui.gallery
 
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
 import com.example.avtovokzal.core.domain.MyLatLng
 import com.example.avtovokzal.ui.gallery.util.*
 import com.example.permissionlib.onRequestPermissionsResult
-
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_maps.*
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class MapsFragment : Fragment() {
@@ -39,16 +39,24 @@ class MapsFragment : Fragment() {
         }
         checkLocationPermission(
             onGranted = {
-                requestLocation(mapFragment) { googleMap, location ->
-                    displayOnMap(googleMap, location,
-                        onNewLocationSelected = { newLocation ->
-                            galleryViewModel.advertModel.location
-                                .postValue(MyLatLng(newLocation.latitude,newLocation.longitude))
-                        }
-                    )
-                }
+                chooseYourLocation()
             }
         )
+    }
+
+    private fun chooseYourLocation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val location = requestLocation()
+            val map = mapFragment?.getMap()
+            location?.let { location ->
+                displayOnMap(map, location,
+                    onNewLocationSelected = { newLocation ->
+                        galleryViewModel.advertModel.location
+                            .postValue(MyLatLng(newLocation.latitude, newLocation.longitude))
+                    }
+                )
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -56,19 +64,11 @@ class MapsFragment : Fragment() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.d("Nurs", "onRequestPermissionsResult")
         onRequestPermissionsResult(
             requestCodeFromSystem = requestCode,
             grantResults = grantResults,
             onGranted = {
-                requestLocation(mapFragment) { googleMap, location ->
-                    displayOnMap(googleMap, location,
-                        onNewLocationSelected = { newLocation ->
-                            galleryViewModel.advertModel.location
-                                .postValue(MyLatLng(newLocation.latitude,newLocation.longitude))
-                        }
-                    )
-                }
+                chooseYourLocation()
             },
             requestCode = MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
         )
