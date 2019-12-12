@@ -1,8 +1,11 @@
 package com.example.avtovokzal
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -62,5 +65,15 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d("Nurs", "MainActivity  request the permission")
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        currentFocus?.let {
+            val imm: InputMethodManager = getSystemService(
+                Context.INPUT_METHOD_SERVICE
+            ) as (InputMethodManager)
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 }

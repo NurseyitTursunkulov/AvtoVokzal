@@ -9,6 +9,7 @@ import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.core.domain.postAnAdd.Result
 import com.example.avtovokzal.core.domain.SendingAdvert
 import com.example.avtovokzal.ui.gallery.util.DateModel
+import com.example.avtovokzal.util.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -16,9 +17,16 @@ import java.util.*
 
 class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
     private val _snackBar = MutableLiveData<String>()
+    private val _dialog = MutableLiveData<Event<String>>()
+    val dialog = _dialog
     private val _spinner = MutableLiveData<Boolean>()
-    val spinner = MutableLiveData<Boolean>()
+    val spinner =_spinner
     val advertModel = AdvertModel()
+    private val _text = MutableLiveData<String>().apply {
+        value = "This is gallery Fragment"
+    }
+    val text: LiveData<String> = _text
+    val time = MutableLiveData<DateModel>()
 
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
         val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
@@ -31,19 +39,14 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
         launchDataLoad {
             sendAdvert.sendAdvert(advertModel).let { result: Result<Unit> ->
                 if (result is Result.Success) {
-
+                    _dialog.postValue(Event("ваше обьявление успешно опубликовано"))
                 } else {
-
+                    _dialog.postValue(Event("произошла ошибка"))
                 }
             }
         }
     }
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
-    }
-    val text: LiveData<String> = _text
-    val time = MutableLiveData<DateModel>()
     private fun launchDataLoad(block: suspend () -> Unit): Job {
         return viewModelScope.launch {
             try {

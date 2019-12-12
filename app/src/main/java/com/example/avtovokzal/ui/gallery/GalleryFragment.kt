@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -17,9 +18,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.avtovokzal.databinding.FragmentGalleryBinding
 import com.example.avtovokzal.ui.gallery.util.*
+import com.example.avtovokzal.util.EventObserver
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 //import com.example.permissionlib.checkCameraPermission
 import com.example.permissionlib.onRequestPermissionsResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.avtovokzal.R as T
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.viewmodel.ext.android.getSharedViewModel
@@ -58,6 +61,15 @@ class GalleryFragment : Fragment() {
         location_button.setOnClickListener {
             navigateToMaps()
         }
+        galleryViewModel.dialog.observe(this,EventObserver{
+             showSuccessDialog(it);
+        })
+        galleryViewModel.spinner.observe(this,Observer{state:Boolean->
+            showProgressBar(state)
+        })
+        galleryViewModel.advertModel.date.observe(this, Observer {
+
+        })
     }
 
     val REQUEST_IMAGE_CAPTURE = 1
@@ -84,4 +96,6 @@ class GalleryFragment : Fragment() {
 
         }
     }
+
+
 }
