@@ -1,33 +1,27 @@
 package com.example.avtovokzal.ui.gallery
 
+//import com.example.permissionlib.checkCameraPermission
 import android.R
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.avtovokzal.databinding.FragmentGalleryBinding
 import com.example.avtovokzal.ui.gallery.util.*
 import com.example.avtovokzal.util.EventObserver
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
-//import com.example.permissionlib.checkCameraPermission
 import com.example.permissionlib.onRequestPermissionsResult
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.example.avtovokzal.R as T
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.viewmodel.ext.android.getSharedViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import com.example.avtovokzal.R as T
 
 
 class GalleryFragment : Fragment() {
@@ -68,7 +62,8 @@ class GalleryFragment : Fragment() {
             showProgressBar(state)
         })
         galleryViewModel.advertModel.date.observe(this, Observer {
-
+            dateTV.visibility = View.VISIBLE
+            dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
         })
     }
 

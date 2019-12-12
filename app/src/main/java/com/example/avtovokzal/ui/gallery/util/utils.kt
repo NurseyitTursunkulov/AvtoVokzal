@@ -18,10 +18,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import java.util.*
 
-fun GalleryFragment.selectTime(ontimeSelected: (year:Int, month:Int, day:Int, hour:Int, min:Int) -> Unit) {
-    var mYear : Int = 0
-    var mMonth : Int = 0
-    var mDay : Int = 0
+fun GalleryFragment.selectTime(ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
+    var mYear: Int = 0
+    var mMonth: Int = 0
+    var mDay: Int = 0
     val calendar = Calendar.getInstance();
     val timePickerDialog = TimePickerDialog(
         requireContext(),
@@ -33,11 +33,12 @@ fun GalleryFragment.selectTime(ontimeSelected: (year:Int, month:Int, day:Int, ho
                 minute: Int
             ) {
             }
+
             override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
 //                galleryViewModel.time.postValue(DateModel(hourOfDay, minute))
 //                Log.d("Nurs","time selected  $hourOfDay $minute")
 //                val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-                ontimeSelected(mYear, mMonth, mDay, hourOfDay,minute)
+                ontimeSelected(mYear, mMonth, mDay, hourOfDay, minute)
 //                sfd.format(Date( mYear, mMonth, mDay, hourOfDay,minute))
             }
 
@@ -50,7 +51,7 @@ fun GalleryFragment.selectTime(ontimeSelected: (year:Int, month:Int, day:Int, ho
             mYear = year
             mMonth = month
             mDay = dayOfMonth
-            Log.d("Nurs","date selected $year $month $dayOfMonth")
+            Log.d("Nurs", "date selected $year $month $dayOfMonth")
             timePickerDialog.show();
         },
         calendar.get(Calendar.YEAR),
@@ -87,8 +88,23 @@ fun GalleryFragment.showSuccessDialog(it: String) {
 
 
 fun GalleryFragment.showProgressBar(state: Boolean) {
-    if (state) progressBar2.visibility = View.VISIBLE
-    else progressBar2.visibility = View.INVISIBLE
+    if (state) {
+        progressBar2.visibility = View.VISIBLE
+        fromTV.isEnabled = false
+        location_button.isEnabled = false
+        toTV.isEnabled = false
+        driving_licience_btn.isEnabled = false
+        calendarBtn.isEnabled = false
+        publicate_button.isEnabled = false
+    } else {
+        progressBar2.visibility = View.INVISIBLE
+        fromTV.isEnabled = true
+        location_button.isEnabled = true
+        toTV.isEnabled = true
+        driving_licience_btn.isEnabled = true
+        calendarBtn.isEnabled = true
+        publicate_button.isEnabled = true
+    }
 }
 
 
@@ -101,9 +117,9 @@ fun GalleryFragment.dispatchTakePictureIntent() {
 }
 
 
-fun GalleryFragment.initAutoCompleteTextViewForCities(layoutId:Int,citiesInKG:List<String>) {
+fun GalleryFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInKG: List<String>) {
     val adapter: ArrayAdapter<String> =
-        ArrayAdapter<String>(requireContext(),layoutId, citiesInKG)
+        ArrayAdapter<String>(requireContext(), layoutId, citiesInKG)
     fromTV.threshold = 1;
     fromTV.setAdapter(adapter)
     toTV.threshold = 1
