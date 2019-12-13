@@ -37,11 +37,7 @@ fun GalleryFragment.selectTime(ontimeSelected: (year: Int, month: Int, day: Int,
             }
 
             override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-//                galleryViewModel.time.postValue(DateModel(hourOfDay, minute))
-//                Log.d("Nurs","time selected  $hourOfDay $minute")
-//                val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
                 ontimeSelected(mYear, mMonth, mDay, hourOfDay, minute)
-//                sfd.format(Date( mYear, mMonth, mDay, hourOfDay,minute))
             }
 
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
@@ -108,10 +104,16 @@ fun GalleryFragment.showProgressBar(state: Boolean) {
         publicate_button.isEnabled = true
     }
 }
- @SuppressLint("SimpleDateFormat")
- fun GalleryFragment.showSelectedDate(it: Date?) {
+
+@SuppressLint("SimpleDateFormat")
+fun GalleryFragment.showSelectedDate(it: Date?) {
     dateTV.visibility = View.VISIBLE
     dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
+}
+
+fun GalleryFragment.showAdress(it: String) {
+    adressTV.visibility = View.VISIBLE
+    adressTV.text = it
 }
 
 

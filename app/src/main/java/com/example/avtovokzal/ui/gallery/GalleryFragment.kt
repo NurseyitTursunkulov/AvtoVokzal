@@ -1,6 +1,5 @@
 package com.example.avtovokzal.ui.gallery
 
-//import com.example.permissionlib.checkCameraPermission
 import android.R
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -28,7 +27,8 @@ import com.example.avtovokzal.R as T
 
 class GalleryFragment : Fragment() {
 
-    val galleryViewModel: GalleryViewModel by sharedViewModel()
+    private val galleryViewModel: GalleryViewModel by sharedViewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,14 +67,9 @@ class GalleryFragment : Fragment() {
             showSelectedDate(it)
         })
         galleryViewModel.advertModel.address.observe(this, EventObserver {
-            adressTV.visibility = View.VISIBLE
-            adressTV.text = it
-            Log.d("Nurs",it +"recieved")
+            showAdress(it)
         })
-
     }
-
-
 
     val REQUEST_IMAGE_CAPTURE = 1
 
