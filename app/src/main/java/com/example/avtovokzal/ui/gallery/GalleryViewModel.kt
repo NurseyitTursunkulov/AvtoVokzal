@@ -9,13 +9,16 @@ import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.core.domain.postAnAdd.Result
 import com.example.avtovokzal.core.domain.SendingAdvert
 import com.example.avtovokzal.util.Event
+import com.google.android.gms.tasks.Task
+import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
-    private val _snackBar = MutableLiveData<String>()
+    private val _snackBar = MutableLiveData<Event<String>>()
+    val snackBar = _snackBar
     private val _dialog = MutableLiveData<Event<String>>()
     val dialog = _dialog
     private val _spinner = MutableLiveData<Boolean>()
@@ -25,6 +28,9 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
         value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
+
+    private lateinit var functions: FirebaseFunctions
+// ...
 
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
         val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
@@ -52,16 +58,13 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
             if (fromCity.value == null || toCity.value == null) {
                 _dialog.postValue(Event("выберите город"))
                 return false
-            }
-            else if (date.value == null) {
+            } else if (date.value == null) {
                 _dialog.postValue(Event("выберите дату"))
                 return false
-            }
-            else if (location.value == null) {
+            } else if (location.value == null) {
                 _dialog.postValue(Event("укажите ваше местоположение"))
                 return false
-            }
-            else return true
+            } else return true
         }
     }
 
@@ -71,7 +74,7 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
                 _spinner.value = true
                 block()
             } catch (error: Error) {
-                _snackBar.value = error.message
+                _snackBar.value = Event(error.toString())
             } finally {
                 _spinner.value = false
             }

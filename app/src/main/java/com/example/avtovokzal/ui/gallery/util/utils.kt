@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun GalleryFragment.selectTime(ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
+inline fun GalleryFragment.selectTime(crossinline ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
     var mYear: Int = 0
     var mMonth: Int = 0
     var mDay: Int = 0

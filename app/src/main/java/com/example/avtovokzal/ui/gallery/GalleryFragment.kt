@@ -17,6 +17,7 @@ import com.example.avtovokzal.ui.gallery.util.*
 import com.example.avtovokzal.util.EventObserver
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.onRequestPermissionsResult
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.viewmodel.ext.android.getSharedViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -68,6 +69,10 @@ class GalleryFragment : Fragment() {
         })
         galleryViewModel.advertModel.address.observe(this, EventObserver {
             showAdress(it)
+        })
+        galleryViewModel.snackBar.observe(this,EventObserver{
+            Snackbar.make(driving_licience_btn, it, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
         })
     }
 
