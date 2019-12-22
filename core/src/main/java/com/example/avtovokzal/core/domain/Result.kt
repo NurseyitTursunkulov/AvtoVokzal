@@ -1,4 +1,4 @@
-package com.example.avtovokzal.core.domain.postAnAdd
+package com.example.avtovokzal.core.domain
 
 sealed class Result<out R> {
 

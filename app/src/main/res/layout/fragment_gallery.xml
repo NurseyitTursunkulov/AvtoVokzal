@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="куда"
@@ -45,47 +45,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/location_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ваше местоположение"
-            app:layout_constraintEnd_toEndOf="@+id/adressTV"
-            app:layout_constraintStart_toStartOf="@+id/adressTV"
-            app:layout_constraintTop_toBottomOf="@+id/calendarBtn" />
-
-        <Button
-            android:id="@+id/driving_licience_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="сфотографировать права"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/priceEditText" />
-
-        <Button
             android:id="@+id/calendarBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="40dp"
             android:text="дата"
-            app:layout_constraintBottom_toTopOf="@+id/location_button"
-            app:layout_constraintEnd_toStartOf="@+id/dateTV"
-            app:layout_constraintStart_toStartOf="@+id/location_button"
+            app:layout_constraintEnd_toEndOf="@+id/publicate_button"
+            app:layout_constraintStart_toStartOf="@+id/publicate_button"
             app:layout_constraintTop_toBottomOf="@+id/fromTV" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(это повысит ваш рейтинг)"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/driving_licience_btn" />
 
         <Button
             android:id="@+id/publicate_button"
@@ -95,53 +63,13 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="40dp"
             android:onClick="@{() ->viewModel.publicateAdd()}"
             android:text="опубликовать"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/fromTV"
-            app:layout_constraintStart_toStartOf="@+id/fromTV"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-        <EditText
-            android:id="@+id/priceEditText"
-            android:layout_width="161dp"
-            android:layout_height="58dp"
-            android:ems="10"
-            android:hint="цена"
-            android:inputType="number"
-            android:text="@={viewModel.advertModel.price}"
-            app:layout_constraintBottom_toTopOf="@+id/driving_licience_btn"
-            app:layout_constraintStart_toStartOf="@+id/driving_licience_btn"
-            app:layout_constraintTop_toBottomOf="@+id/location_button" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:text="сом"
-            android:textSize="36sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/priceEditText"
-            app:layout_constraintEnd_toEndOf="@+id/driving_licience_btn"
-            app:layout_constraintStart_toEndOf="@+id/priceEditText" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="end"
-            app:constraint_referenced_ids="calendarBtn"
-            tools:layout_editor_absoluteX="73dp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/publicate_button"
-            app:layout_constraintEnd_toEndOf="@+id/publicate_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/publicate_button"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/fromTV" />
 
         <ProgressBar
             android:id="@+id/progressBar2"
@@ -151,37 +79,35 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.375"
             tools:visibility="visible" />
 
         <TextView
             android:id="@+id/dateTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="TextView"
-            android:textSize="20sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/calendarBtn"
-            app:layout_constraintEnd_toEndOf="@+id/location_button"
-            app:layout_constraintTop_toTopOf="@+id/calendarBtn"
-            tools:visibility="visible" />
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/calendarBtn"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="@+id/calendarBtn"
+            app:layout_constraintTop_toBottomOf="@+id/calendarBtn" />
 
         <TextView
-            android:id="@+id/adressTV"
-            android:visibility="invisible"
-            tools:visibility="visible"
+            android:id="@+id/amaountOfSeatTV"
+            android:textSize="36sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="TextView"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/priceEditText"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/priceEditText"
-            app:layout_constraintTop_toBottomOf="@+id/location_button" />
+            tools:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

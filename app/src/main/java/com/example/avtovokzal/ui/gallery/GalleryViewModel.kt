@@ -1,22 +1,18 @@
 package com.example.avtovokzal.ui.gallery
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.avtovokzal.core.domain.AdvertModel
-import com.example.avtovokzal.core.domain.postAnAdd.Result
-import com.example.avtovokzal.core.domain.SendingAdvert
+import com.example.avtovokzal.core.domain.Cities
+import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
+import com.example.avtovokzal.core.domain.Result
 import com.example.avtovokzal.util.Event
-import com.google.android.gms.tasks.Task
-import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
-class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
+class GalleryViewModel(val sendAdvert: SendingAdvert, val gettingCities : Cities) : ViewModel() {
     private val _snackBar = MutableLiveData<Event<String>>()
     val snackBar = _snackBar
     private val _dialog = MutableLiveData<Event<String>>()
@@ -28,14 +24,26 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
         value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
+    val cities = MutableLiveData<List<String>>()
 
-    private lateinit var functions: FirebaseFunctions
-// ...
+    init {
+        getCities()
+    }
+
+    private fun getCities() {
+        launchDataLoad {
+            when (val citiList = gettingCities.getCities()) {
+                is Result.Success -> {
+                    val h = citiList.data.mapNotNull {
+                        it.name
+                    }
+                    cities.postValue(h)
+                }
+            }
+        }
+    }
 
     fun onTimeSelected(year: Int, month: Int, day: Int, hour: Int, min: Int) {
-        val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-        sfd.format(Date(year, month, day, hour, min))
-        Log.d("Nurs", sfd.format(Date(year, month, day, hour, min)))
         advertModel.date.postValue(Date(year, month, day, hour, min))
     }
 
@@ -61,10 +69,8 @@ class GalleryViewModel(val sendAdvert: SendingAdvert) : ViewModel() {
             } else if (date.value == null) {
                 _dialog.postValue(Event("выберите дату"))
                 return false
-            } else if (location.value == null) {
-                _dialog.postValue(Event("укажите ваше местоположение"))
-                return false
-            } else return true
+            }
+            else return true
         }
     }
 

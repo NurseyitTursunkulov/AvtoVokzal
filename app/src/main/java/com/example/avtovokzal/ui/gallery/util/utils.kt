@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.example.avtovokzal.ui.gallery.GalleryFragment
 import com.example.avtovokzal.ui.gallery.GalleryFragmentDirections
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-inline fun GalleryFragment.selectTime(crossinline ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
+inline fun Fragment.selectTime(crossinline ontimeSelected: (year: Int, month: Int, day: Int, hour: Int, min: Int) -> Unit) {
     var mYear: Int = 0
     var mMonth: Int = 0
     var mDay: Int = 0
@@ -89,17 +90,17 @@ fun GalleryFragment.showProgressBar(state: Boolean) {
     if (state) {
         progressBar2.visibility = View.VISIBLE
         fromTV.isEnabled = false
-        location_button.isEnabled = false
+//        location_button.isEnabled = false
         toTV.isEnabled = false
-        driving_licience_btn.isEnabled = false
+//        driving_licience_btn.isEnabled = false
         calendarBtn.isEnabled = false
         publicate_button.isEnabled = false
     } else {
         progressBar2.visibility = View.INVISIBLE
         fromTV.isEnabled = true
-        location_button.isEnabled = true
+//        location_button.isEnabled = true
         toTV.isEnabled = true
-        driving_licience_btn.isEnabled = true
+//        driving_licience_btn.isEnabled = true
         calendarBtn.isEnabled = true
         publicate_button.isEnabled = true
     }
@@ -112,8 +113,8 @@ fun GalleryFragment.showSelectedDate(it: Date?) {
 }
 
 fun GalleryFragment.showAdress(it: String) {
-    adressTV.visibility = View.VISIBLE
-    adressTV.text = it
+//    adressTV.visibility = View.VISIBLE
+//    adressTV.text = it
 }
 
 

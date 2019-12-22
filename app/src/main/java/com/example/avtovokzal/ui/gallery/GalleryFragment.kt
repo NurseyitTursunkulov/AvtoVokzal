@@ -42,7 +42,6 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, citiesInKG.toList())
         calendarBtn.setOnClickListener {
             selectTime(
                 ontimeSelected = { year: Int, month: Int, day: Int, hour: Int, min: Int ->
@@ -50,14 +49,7 @@ class GalleryFragment : Fragment() {
                 }
             )
         }
-        driving_licience_btn.setOnClickListener {
-            checkCameraPermission (onGranted = {
-                dispatchTakePictureIntent()
-            } )
-        }
-        location_button.setOnClickListener {
-            navigateToMaps()
-        }
+
         galleryViewModel.dialog.observe(this,EventObserver{
              showSuccessDialog(it);
         })
@@ -71,8 +63,11 @@ class GalleryFragment : Fragment() {
             showAdress(it)
         })
         galleryViewModel.snackBar.observe(this,EventObserver{
-            Snackbar.make(driving_licience_btn, it, Snackbar.LENGTH_LONG)
+            Snackbar.make(fromTV, it, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        })
+        galleryViewModel.cities.observe(this, Observer {
+            initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
         })
     }
 
@@ -91,15 +86,5 @@ class GalleryFragment : Fragment() {
                 dispatchTakePictureIntent()
             })
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            imageView2.setImageBitmap(imageBitmap)
-
-        }
-    }
-
 
 }
