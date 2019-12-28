@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs")
     kotlin("android.extensions")
+    id("kotlin-android-extensions")
 
 }
 android {
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.avtovokzal"
-        minSdkVersion (16)
+        minSdkVersion (21)
         targetSdkVersion (29)
         versionCode = 1
         versionName = "1.0"
@@ -75,6 +76,15 @@ dependencies {
     implementation ("com.google.android.material:material:1.2.0-alpha02")
     implementation (project(":permissionlib"))
     implementation (project(":core"))
+
+    val compose_version = "0.1.0-dev03"
+    implementation("androidx.compose:compose-runtime:$compose_version")
+    implementation("androidx.ui:ui-framework:$compose_version")
+    implementation("androidx.ui:ui-layout:$compose_version")
+    implementation("androidx.ui:ui-material:$compose_version")
+    implementation("androidx.ui:ui-foundation:$compose_version")
+    implementation("androidx.ui:ui-animation:$compose_version")
+    implementation ("androidx.ui:ui-tooling:$compose_version")
 
     // Koin for Kotlin apps
     implementation ("org.koin:koin-android:2.0.1")
