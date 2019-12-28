@@ -33,6 +33,8 @@ class SlideshowViewModel(
     }
     val text: LiveData<String> = _text
     val cities = MutableLiveData<List<String>>()
+    val _advertsLoadedEvent = MutableLiveData<Event<List<AdvertModel>>>()
+    val advertsLoadedEvent = _advertsLoadedEvent
 
     init {
         getCities()
@@ -64,8 +66,9 @@ class SlideshowViewModel(
                             date.value?.let { dateV ->
                                 val res = findingAdverts.findAdd(fromCityV, toCityV, dateV)
                                 if (res is Result.Success) {
-                                    Log.d("Nurs","${res.data}")
-                                    _dialog.postValue(Event("${res.data as List<AdvertModel>}"))
+                                    Log.d("Nurs","result = ${res.data}")
+                                    _advertsLoadedEvent.postValue(Event(res.data))
+//                                    _dialog.postValue(Event("${res.data as List<AdvertModel>}"))
                                 } else {
                                     _dialog.postValue(Event("произошла ошибка"))
                                 }

@@ -13,7 +13,8 @@ data class AdvertModelPresenterLevel(
     val address: MutableLiveData<Event<String>> = MutableLiveData(),
     val fromCity: MutableLiveData<String> = MutableLiveData(),
     val toCity: MutableLiveData<String> = MutableLiveData(),
-    val date: MutableLiveData<Date> = MutableLiveData()
+    val date: MutableLiveData<Date> = MutableLiveData(),
+    var id: String = UUID.randomUUID().toString()
 ) {
     fun convertToDomainModel(): AdvertModel {
         return AdvertModel(

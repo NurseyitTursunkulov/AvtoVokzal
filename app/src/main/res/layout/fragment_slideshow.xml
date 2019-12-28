@@ -110,7 +110,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/toTV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/toTV"
-            app:srcCompat="@drawable/ic_iconfinder_departure" />
+            app:srcCompat="@drawable/ic_iconfinder_destination" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -121,7 +121,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/fromTV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fromTV"
-            app:srcCompat="@drawable/ic_iconfinder_destination" />
+            app:srcCompat="@drawable/ic_iconfinder_departure" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

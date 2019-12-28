@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.R
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.avtovokzal.databinding.FragmentSlideshowBinding
 import com.example.avtovokzal.ui.gallery.util.citiesInKG
 import com.example.avtovokzal.ui.gallery.util.selectTime
@@ -61,6 +63,10 @@ class SlideshowFragment : Fragment() {
         })
         slideshowViewModel.cities.observe(this, Observer {
             initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
+        })
+        slideshowViewModel.advertsLoadedEvent.observe(this,Observer{
+            this.findNavController()
+                .navigate(SlideshowFragmentDirections.actionNavSlideshowToAdvertsFragment())
         })
     }
 }
