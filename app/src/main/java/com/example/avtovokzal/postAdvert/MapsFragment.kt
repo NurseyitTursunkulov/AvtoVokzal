@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.gallery
+package com.example.avtovokzal.postAdvert
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.avtovokzal.MainActivity
 import com.example.avtovokzal.R
-import com.example.avtovokzal.ui.gallery.util.*
+import com.example.avtovokzal.postAdvert.util.*
 import com.example.avtovokzal.util.Event
 import com.example.permissionlib.onRequestPermissionsResult
 import com.google.android.gms.maps.SupportMapFragment

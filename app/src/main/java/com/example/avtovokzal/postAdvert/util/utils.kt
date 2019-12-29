@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.gallery.util
+package com.example.avtovokzal.postAdvert.util
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.example.avtovokzal.ui.gallery.GalleryFragment
-import com.example.avtovokzal.ui.gallery.GalleryFragmentDirections
+import com.example.avtovokzal.postAdvert.GalleryFragment
+import com.example.avtovokzal.postAdvert.GalleryFragmentDirections
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.checkPermission
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

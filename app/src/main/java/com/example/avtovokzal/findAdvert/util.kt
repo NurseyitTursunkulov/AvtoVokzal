@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.slideshow
+package com.example.avtovokzal.findAdvert
 
 import android.annotation.SuppressLint
 import android.view.View

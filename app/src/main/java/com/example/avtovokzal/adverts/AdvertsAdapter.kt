@@ -1,11 +1,11 @@
-package com.example.avtovokzal.ui.adverts
+package com.example.avtovokzal.adverts
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avtovokzal.R
-import com.example.avtovokzal.ui.slideshow.SlideshowViewModel
+import com.example.avtovokzal.findAdvert.SlideshowViewModel
 import kotlinx.android.synthetic.main.advert_item.view.*
 import java.text.SimpleDateFormat
 

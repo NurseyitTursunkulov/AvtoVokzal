@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.home
+package com.example.avtovokzal.home
 
 import android.os.Bundle
 import android.util.Log

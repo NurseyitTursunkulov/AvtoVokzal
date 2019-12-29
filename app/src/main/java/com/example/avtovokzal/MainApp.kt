@@ -7,8 +7,8 @@ import com.example.avtovokzal.core.domain.findAdd.FindingAdverts
 import com.example.avtovokzal.core.domain.findAdd.FindingAdvertsImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendAdvertImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
-import com.example.avtovokzal.ui.gallery.GalleryViewModel
-import com.example.avtovokzal.ui.slideshow.SlideshowViewModel
+import com.example.avtovokzal.postAdvert.GalleryViewModel
+import com.example.avtovokzal.findAdvert.SlideshowViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger

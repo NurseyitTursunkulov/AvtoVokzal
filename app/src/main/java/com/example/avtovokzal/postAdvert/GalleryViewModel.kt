@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.gallery
+package com.example.avtovokzal.postAdvert
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

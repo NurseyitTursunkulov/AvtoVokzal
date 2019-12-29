@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.home
+package com.example.avtovokzal.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

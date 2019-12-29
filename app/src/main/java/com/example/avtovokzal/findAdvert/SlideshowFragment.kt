@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.slideshow
+package com.example.avtovokzal.findAdvert
 
 import android.R
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.avtovokzal.databinding.FragmentSlideshowBinding
-import com.example.avtovokzal.ui.gallery.util.selectTime
+import com.example.avtovokzal.postAdvert.util.selectTime
 import com.example.avtovokzal.util.EventObserver
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_slideshow.*

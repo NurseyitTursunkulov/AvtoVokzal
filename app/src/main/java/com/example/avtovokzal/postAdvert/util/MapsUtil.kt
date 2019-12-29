@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.gallery.util
+package com.example.avtovokzal.postAdvert.util
 
 import android.Manifest
 import android.content.Context
@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.example.avtovokzal.R
-import com.example.avtovokzal.ui.gallery.MapsFragment
-import com.example.avtovokzal.ui.gallery.MapsFragmentDirections
+import com.example.avtovokzal.postAdvert.MapsFragment
+import com.example.avtovokzal.postAdvert.MapsFragmentDirections
 import com.example.permissionlib.checkPermission
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,7 +30,6 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
 

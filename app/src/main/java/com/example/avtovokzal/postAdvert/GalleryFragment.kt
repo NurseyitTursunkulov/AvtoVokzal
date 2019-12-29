@@ -1,11 +1,7 @@
-package com.example.avtovokzal.ui.gallery
+package com.example.avtovokzal.postAdvert
 
 import android.R
-import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +9,13 @@ import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.avtovokzal.databinding.FragmentGalleryBinding
-import com.example.avtovokzal.ui.gallery.util.*
+import com.example.avtovokzal.postAdvert.util.*
 import com.example.avtovokzal.util.EventObserver
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.onRequestPermissionsResult
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gallery.*
-import org.koin.android.viewmodel.ext.android.getSharedViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 import com.example.avtovokzal.R as T
 
 

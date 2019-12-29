@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.gallery.util
+package com.example.avtovokzal.postAdvert.util
 
 var citiesInKG =
     arrayOf(

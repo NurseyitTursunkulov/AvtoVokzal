@@ -1,9 +1,9 @@
-package com.example.avtovokzal.ui.adverts
+package com.example.avtovokzal.adverts
 
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.avtovokzal.ui.slideshow.SlideshowViewModel
+import com.example.avtovokzal.findAdvert.SlideshowViewModel
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_adverts.*
 

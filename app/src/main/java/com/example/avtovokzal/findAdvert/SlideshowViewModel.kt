@@ -1,4 +1,4 @@
-package com.example.avtovokzal.ui.slideshow
+package com.example.avtovokzal.findAdvert
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import com.example.avtovokzal.core.domain.Cities
 import com.example.avtovokzal.core.domain.Result
 import com.example.avtovokzal.core.domain.findAdd.FindingAdverts
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
-import com.example.avtovokzal.ui.gallery.AdvertModelPresenterLevel
+import com.example.avtovokzal.postAdvert.AdvertModelPresenterLevel
 import com.example.avtovokzal.util.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
