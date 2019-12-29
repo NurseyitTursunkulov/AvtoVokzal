@@ -48,8 +48,8 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" >
         <action
-            android:id="@+id/action_nav_slideshow_to_advertsFragment"
-            app:destination="@id/advertsFragment" />
+            android:id="@+id/action_nav_slideshow_to_advertsFragment2"
+            app:destination="@id/advertsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -66,8 +66,14 @@
             app:destination="@id/nav_gallery" />
     </fragment>
     <fragment
-        android:id="@+id/advertsFragment"
+        android:id="@+id/advertsFragment2"
         android:name="com.example.avtovokzal.ui.adverts.AdvertsFragment"
-        android:label="adverts_fragment"
-        tools:layout="@layout/adverts_fragment" />
+        android:label="fragment_adverts"
+        tools:layout="@layout/fragment_adverts" >
+        <action
+            android:id="@+id/action_advertsFragment2_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_home"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

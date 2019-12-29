@@ -33,7 +33,7 @@ class SlideshowViewModel(
     }
     val text: LiveData<String> = _text
     val cities = MutableLiveData<List<String>>()
-    val _advertsLoadedEvent = MutableLiveData<Event<List<AdvertModel>>>()
+    private val _advertsLoadedEvent = MutableLiveData<Event<List<AdvertModel>>>()
     val advertsLoadedEvent = _advertsLoadedEvent
 
     init {
@@ -58,6 +58,7 @@ class SlideshowViewModel(
     }
 
     fun findAdd() {
+//        _advertsLoadedEvent.postValue(Event(listOf(AdvertModel())))
         if (validateInputs())
             launchDataLoad {
                 with(advertModel) {
@@ -67,24 +68,17 @@ class SlideshowViewModel(
                                 val res = findingAdverts.findAdd(fromCityV, toCityV, dateV)
                                 if (res is Result.Success) {
                                     Log.d("Nurs","result = ${res.data}")
+                                    res.data.forEach {
+                                        Log.d("Nurs","result each = ${it}")
+                                    }
                                     _advertsLoadedEvent.postValue(Event(res.data))
-//                                    _dialog.postValue(Event("${res.data as List<AdvertModel>}"))
                                 } else {
                                     _dialog.postValue(Event("произошла ошибка"))
                                 }
-
                             }
                         }
                     }
                 }
-//                sendAdvert.sendAdvert(advertModel.convertToDomainModel())
-//                    .let { result: Result<Unit> ->
-//                        if (result is Result.Success) {
-//                            _dialog.postValue(Event("ваше обьявление успешно опубликовано"))
-//                        } else {
-//                            _dialog.postValue(Event("произошла ошибка"))
-//                        }
-//                    }
             }
     }
 

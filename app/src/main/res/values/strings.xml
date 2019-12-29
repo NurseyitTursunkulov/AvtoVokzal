@@ -32,4 +32,8 @@
 
     <string name="succesful_advert_upload">успешно опубликовано</string>
     <string name="error_happened">произошла ошибка</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
 </resources>

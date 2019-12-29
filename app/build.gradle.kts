@@ -10,15 +10,15 @@ plugins {
 }
 android {
     compileSdkVersion(29)
-    buildToolsVersion ="29.0.2"
+    buildToolsVersion = "29.0.2"
 
     defaultConfig {
         applicationId = "com.example.avtovokzal"
-        minSdkVersion (21)
-        targetSdkVersion (29)
+        minSdkVersion(21)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
-        multiDexEnabled =  true
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,7 +29,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -66,16 +66,16 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("com.google.android.gms:play-services-maps:17.0.0")
     implementation("com.google.firebase:firebase-database:19.2.0")
-    implementation ("com.google.firebase:firebase-functions:19.0.1")
+    implementation("com.google.firebase:firebase-functions:19.0.1")
     implementation("com.google.firebase:firebase-firestore:21.3.1")
     implementation("com.google.firebase:firebase-messaging:20.1.0")
-    testImplementation ("junit:junit:4.12")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.2.0")
-    implementation ("com.google.android.gms:play-services-location:17.0.0")
-    implementation ("com.google.android.material:material:1.2.0-alpha02")
-    implementation (project(":permissionlib"))
-    implementation (project(":core"))
+    testImplementation("junit:junit:4.12")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    implementation("com.google.android.gms:play-services-location:17.0.0")
+    implementation("com.google.android.material:material:1.2.0-alpha02")
+    implementation(project(":permissionlib"))
+    implementation(project(":core"))
 
     val compose_version = "0.1.0-dev03"
     implementation("androidx.compose:compose-runtime:$compose_version")
@@ -84,15 +84,15 @@ dependencies {
     implementation("androidx.ui:ui-material:$compose_version")
     implementation("androidx.ui:ui-foundation:$compose_version")
     implementation("androidx.ui:ui-animation:$compose_version")
-    implementation ("androidx.ui:ui-tooling:$compose_version")
+    implementation("androidx.ui:ui-tooling:$compose_version")
 
     // Koin for Kotlin apps
-    implementation ("org.koin:koin-android:2.0.1")
-    implementation ("org.koin:koin-android-viewmodel:2.0.1")
-    implementation ("com.google.firebase:firebase-database:19.2.0")
+    implementation("org.koin:koin-android:2.0.1")
+    implementation("org.koin:koin-android-viewmodel:2.0.1")
+    implementation("com.google.firebase:firebase-database:19.2.0")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.2")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03")
 }

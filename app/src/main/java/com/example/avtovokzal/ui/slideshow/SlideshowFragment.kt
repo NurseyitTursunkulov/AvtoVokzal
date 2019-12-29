@@ -1,19 +1,15 @@
 package com.example.avtovokzal.ui.slideshow
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import android.R
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.avtovokzal.databinding.FragmentSlideshowBinding
-import com.example.avtovokzal.ui.gallery.util.citiesInKG
 import com.example.avtovokzal.ui.gallery.util.selectTime
 import com.example.avtovokzal.util.EventObserver
 import com.google.android.material.snackbar.Snackbar
@@ -64,9 +60,9 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel.cities.observe(this, Observer {
             initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
         })
-        slideshowViewModel.advertsLoadedEvent.observe(this,Observer{
+        slideshowViewModel.advertsLoadedEvent.observe(this,EventObserver{
             this.findNavController()
-                .navigate(SlideshowFragmentDirections.actionNavSlideshowToAdvertsFragment())
+                .navigate(SlideshowFragmentDirections.actionNavSlideshowToAdvertsFragment2())
         })
     }
 }
