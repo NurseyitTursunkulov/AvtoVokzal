@@ -2,16 +2,24 @@ package com.example.avtovokzal.adverts
 
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.avtovokzal.findAdvert.SlideshowViewModel
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_adverts.*
+
 
 fun AdvertsFragment.initRecyclerView(slideShowViewModel: SlideshowViewModel) {
     recycler_view.apply {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(requireContext())
         adapter = AdvertsAdapter(slideShowViewModel)
+        addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 }
 
