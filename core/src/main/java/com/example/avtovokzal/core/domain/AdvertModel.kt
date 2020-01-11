@@ -9,7 +9,8 @@ data class AdvertModel(
     val address: String?,
     val fromCity: String?,
     val toCity: String?,
-    val date: Date?
+    val date: Date?,
+    val id:String = UUID.randomUUID().toString()
 //    ,
 //    val freeSeat: Int,
 //    val description: String?

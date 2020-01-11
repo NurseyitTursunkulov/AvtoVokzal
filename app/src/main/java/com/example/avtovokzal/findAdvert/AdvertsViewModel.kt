@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-class SlideshowViewModel(
+class AdvertsViewModel(
     val sendAdvert: SendingAdvert,
     val gettingCities: Cities,
     val findingAdverts: FindingAdverts
@@ -35,6 +35,9 @@ class SlideshowViewModel(
     val cities = MutableLiveData<List<String>>()
     private val _advertsLoadedEvent = MutableLiveData<Event<List<AdvertModel>>>()
     val advertsLoadedEvent = _advertsLoadedEvent
+
+    private val _items = MutableLiveData<List<AdvertModel>>().apply { value = emptyList() }
+    val items: LiveData<List<AdvertModel>> = _items
 
     init {
         getCities()
@@ -72,6 +75,7 @@ class SlideshowViewModel(
                                         Log.d("Nurs","result each = ${it}")
                                     }
                                     _advertsLoadedEvent.postValue(Event(res.data))
+                                    _items.postValue(res.data)
                                 } else {
                                     _dialog.postValue(Event("произошла ошибка"))
                                 }

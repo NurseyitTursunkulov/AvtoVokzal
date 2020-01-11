@@ -55,3 +55,4 @@ Thumbs.db
 .idea/datasources.xml
 .idea/dataSources.ids
 .idea/gradle.xml
+/hs_err_pid13779.log

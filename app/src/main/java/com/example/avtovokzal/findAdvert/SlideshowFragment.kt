@@ -19,7 +19,7 @@ import com.example.avtovokzal.R as T
 
 class SlideshowFragment : Fragment() {
 
-    private val slideshowViewModel: SlideshowViewModel by sharedViewModel()
+    private val advertsViewModel: AdvertsViewModel by sharedViewModel()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class SlideshowFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val binding = inflate<FragmentSlideshowBinding>(inflater, T.layout.fragment_slideshow, container, false)
-        binding.viewModel = slideshowViewModel
+        binding.viewModel = advertsViewModel
         return binding.root
     }
 
@@ -36,31 +36,31 @@ class SlideshowFragment : Fragment() {
         calendarBtn.setOnClickListener {
             selectTime(
                 ontimeSelected = { year: Int, month: Int, day: Int, hour: Int, min: Int ->
-                    slideshowViewModel.onTimeSelected(year,month,day,hour,min)
+                    advertsViewModel.onTimeSelected(year,month,day,hour,min)
                 }
             )
         }
 
-        slideshowViewModel.dialog.observe(this,EventObserver{
+        advertsViewModel.dialog.observe(this,EventObserver{
             showSuccessDialog(it);
         })
-        slideshowViewModel.spinner.observe(this,Observer{state:Boolean->
+        advertsViewModel.spinner.observe(this,Observer{ state:Boolean->
             showProgressBar(state)
         })
-        slideshowViewModel.advertModel.date.observe(this, Observer {
+        advertsViewModel.advertModel.date.observe(this, Observer {
             showSelectedDate(it)
         })
-        slideshowViewModel.advertModel.address.observe(this, EventObserver {
+        advertsViewModel.advertModel.address.observe(this, EventObserver {
             showAdress(it)
         })
-        slideshowViewModel.snackBar.observe(this,EventObserver{
+        advertsViewModel.snackBar.observe(this,EventObserver{
             Snackbar.make(fromTV, it, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         })
-        slideshowViewModel.cities.observe(this, Observer {
+        advertsViewModel.cities.observe(this, Observer {
             initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
         })
-        slideshowViewModel.advertsLoadedEvent.observe(this,EventObserver{
+        advertsViewModel.advertsLoadedEvent.observe(this,EventObserver{
             this.findNavController()
                 .navigate(SlideshowFragmentDirections.actionNavSlideshowToAdvertsFragment2())
         })
