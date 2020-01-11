@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.avtovokzal.adverts.tripleNullCheck
 import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.core.domain.Cities
 import com.example.avtovokzal.core.domain.Result
@@ -61,26 +62,19 @@ class AdvertsViewModel(
     }
 
     fun findAdd() {
-//        _advertsLoadedEvent.postValue(Event(listOf(AdvertModel())))
         if (validateInputs())
             launchDataLoad {
-                with(advertModel) {
-                    fromCity.value?.let { fromCityV ->
-                        toCity.value?.let { toCityV ->
-                            date.value?.let { dateV ->
-                                val res = findingAdverts.findAdd(fromCityV, toCityV, dateV)
-                                if (res is Result.Success) {
-                                    Log.d("Nurs","result = ${res.data}")
-                                    res.data.forEach {
-                                        Log.d("Nurs","result each = ${it}")
-                                    }
-                                    _advertsLoadedEvent.postValue(Event(res.data))
-                                    _items.postValue(res.data)
-                                } else {
-                                    _dialog.postValue(Event("произошла ошибка"))
-                                }
-                            }
+                tripleNullCheck(advertModel) { fromCityV: String, toCityV: String, dateV: Date ->
+                    val res = findingAdverts.findAdd(fromCityV, toCityV, dateV)
+                    if (res is Result.Success) {
+                        Log.d("Nurs", "result = ${res.data}")
+                        res.data.forEach {
+                            Log.d("Nurs", "result each = ${it}")
                         }
+                        _advertsLoadedEvent.postValue(Event(res.data))
+                        _items.postValue(res.data)
+                    } else {
+                        _dialog.postValue(Event("произошла ошибка"))
                     }
                 }
             }

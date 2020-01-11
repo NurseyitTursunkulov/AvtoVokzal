@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.avtovokzal.databinding.FragmentAdvertsBinding
 import com.example.avtovokzal.findAdvert.AdvertsViewModel
+import com.example.avtovokzal.postAdvert.AdvertModelPresenterLevel
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.util.*
 
 
 fun AdvertsFragment.initRecyclerView(
@@ -49,5 +51,20 @@ fun AdvertsFragment.changeOnBackPressed(advertsFragment: AdvertsFragment) {
 fun AdvertsFragment.changeTitle() {
     with(advertsViewModel.advertsLoadedEvent.value?.peekContent()?.first()) {
         requireActivity().toolbar?.title = "${this?.fromCity} - ${this?.toCity}"
+    }
+}
+
+suspend fun tripleNullCheck(
+    advertModel: AdvertModelPresenterLevel,
+    action:suspend (fromCity: String, toCity: String, date: Date) -> Unit
+) {
+    with(advertModel) {
+        fromCity.value?.let { fromCityV ->
+            toCity.value?.let { toCityV ->
+                date.value?.let { dateV ->
+                    action(fromCityV, toCityV, dateV)
+                }
+            }
+        }
     }
 }
