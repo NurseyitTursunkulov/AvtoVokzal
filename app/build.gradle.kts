@@ -24,12 +24,16 @@ android {
 
     dataBinding {
         isEnabled = true
+        isEnabledForTests = true
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -95,4 +99,72 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03")
+
+    // Dependencies for local unit tests
+    val junitVersion = "4.12"
+    val mockitoVersion = "2.8.9"
+    val hamcrestVersion = "1.3"
+    val archTestingVersion = "2.0.0"
+    val coroutinesVersion = "1.1.0"
+    val robolectricVersion = "4.3-beta-1"
+    val espressoVersion = "3.2.0"
+    val truthVersion = "0.44"
+    val dexMakerVersion = "2.12.1"
+    val androidXTestCoreVersion = "1.3.0-alpha03"
+    val androidXTestExtKotlinRunnerVersion = "1.1.1-beta01"
+    val androidXTestRulesVersion = "1.2.0-beta01"
+    val androidXAnnotations = "1.1.0"
+    val androidXLegacySupport = "1.0.0"
+    val recyclerViewVersion = "1.0.0"
+    val appCompatVersion = "1.0.2"
+    val materialVersion = "1.0.0"
+    val fragmentVersion = "1.2.0-rc04"
+    implementation("androidx.test.espresso:espresso-idling-resource:$espressoVersion")
+
+    // Dependencies for local unit tests
+    testImplementation("junit:junit:$junitVersion")
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation("androidx.arch.core:core-testing:$archTestingVersion")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation("org.robolectric:robolectric:$robolectricVersion")
+    testImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
+    testImplementation("androidx.test.espresso:espresso-contrib:$espressoVersion")
+    testImplementation("androidx.test.espresso:espresso-intents:$espressoVersion")
+    testImplementation("com.google.truth:truth:$truthVersion")
+
+    // Dependencies for Android unit tests
+    androidTestImplementation("junit:junit:$junitVersion")
+    androidTestImplementation("org.mockito:mockito-core:$mockitoVersion")
+    androidTestImplementation("com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion")
+
+    // AndroidX Test - JVM testing
+    testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
+    testImplementation("androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion")
+    testImplementation("androidx.test:rules:$androidXTestRulesVersion")
+    implementation ("androidx.fragment:fragment-testing:$fragmentVersion"){
+        exclude("androidx.test", "core")
+    }
+    implementation ("androidx.test:core:$androidXTestCoreVersion")
+    implementation ("androidx.fragment:fragment:$fragmentVersion")
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
+    androidTestImplementation("androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion")
+    androidTestImplementation("androidx.test:rules:$androidXTestRulesVersion")
+    androidTestImplementation("androidx.arch.core:core-testing:$archTestingVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espressoVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:$espressoVersion")
+    androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:$espressoVersion")
+    androidTestImplementation("org.robolectric:annotations:$robolectricVersion")
+    implementation("androidx.test.espresso:espresso-idling-resource:$espressoVersion")
+
+    // Resolve conflicts between main and test APK:
+    androidTestImplementation("androidx.annotation:annotation:$androidXAnnotations")
+    androidTestImplementation("androidx.legacy:legacy-support-v4:$androidXLegacySupport")
+    androidTestImplementation("androidx.recyclerview:recyclerview:$recyclerViewVersion")
+    androidTestImplementation("androidx.appcompat:appcompat:$appCompatVersion")
+    androidTestImplementation("com.google.android.material:material:$materialVersion")
 }
