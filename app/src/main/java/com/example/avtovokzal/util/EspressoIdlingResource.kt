@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.avtovokzal
+package com.example.avtovokzal.util
 
 import androidx.test.espresso.IdlingResource
+import androidx.test.espresso.idling.CountingIdlingResource
 
 /**
  * Contains a static reference to [IdlingResource], only available in the 'mock' build type.
@@ -24,7 +25,7 @@ object EspressoIdlingResource {
 
     private const val RESOURCE = "GLOBAL"
 
-    @JvmField val countingIdlingResource = SimpleCountingIdlingResource(RESOURCE)
+    @JvmField val countingIdlingResource = CountingIdlingResource(RESOURCE)
 
     fun increment() {
         countingIdlingResource.increment()

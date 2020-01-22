@@ -12,6 +12,7 @@ import com.example.avtovokzal.core.domain.Result
 import com.example.avtovokzal.core.domain.findAdd.FindingAdverts
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
 import com.example.avtovokzal.postAdvert.AdvertModelPresenterLevel
+import com.example.avtovokzal.util.EspressoIdlingResource
 import com.example.avtovokzal.util.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -93,15 +94,17 @@ class AdvertsViewModel(
     }
 
     private fun launchDataLoad(block: suspend () -> Unit): Job {
-        return viewModelScope.launch {
-            try {
-                _spinner.value = true
-                block()
-            } catch (error: Error) {
-                _snackBar.value = Event(error.toString())
-            } finally {
-                _spinner.value = false
+        EspressoIdlingResource.increment()
+            return viewModelScope.launch {
+                try {
+                    _spinner.value = true
+                    block()
+                } catch (error: Error) {
+                    _snackBar.value = Event(error.toString())
+                } finally {
+                    EspressoIdlingResource.decrement()
+                    _spinner.value = false
+                }
             }
-        }
     }
 }

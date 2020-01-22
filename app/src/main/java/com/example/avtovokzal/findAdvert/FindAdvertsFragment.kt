@@ -11,16 +11,19 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.avtovokzal.databinding.FragmentSlideshowBinding
 import com.example.avtovokzal.postAdvert.util.selectTime
+import com.example.avtovokzal.util.EspressoIdlingResource
 import com.example.avtovokzal.util.EventObserver
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_slideshow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.newSingleThreadContext
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import com.example.avtovokzal.R as T
 
-class SlideshowFragment : Fragment() {
+class FindAdvertsFragment : Fragment() {
 
     private val advertsViewModel: AdvertsViewModel by sharedViewModel()
-
+    private val scope = CoroutineScope(newSingleThreadContext("name"))
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -41,28 +44,28 @@ class SlideshowFragment : Fragment() {
             )
         }
 
-        advertsViewModel.dialog.observe(this,EventObserver{
+        advertsViewModel.dialog.observe(viewLifecycleOwner,EventObserver{
             showSuccessDialog(it);
         })
-        advertsViewModel.spinner.observe(this,Observer{ state:Boolean->
+        advertsViewModel.spinner.observe(viewLifecycleOwner,Observer{ state:Boolean->
             showProgressBar(state)
         })
-        advertsViewModel.advertModel.date.observe(this, Observer {
+        advertsViewModel.advertModel.date.observe(viewLifecycleOwner, Observer {
             showSelectedDate(it)
         })
-        advertsViewModel.advertModel.address.observe(this, EventObserver {
+        advertsViewModel.advertModel.address.observe(viewLifecycleOwner, EventObserver {
             showAdress(it)
         })
-        advertsViewModel.snackBar.observe(this,EventObserver{
+        advertsViewModel.snackBar.observe(viewLifecycleOwner,EventObserver{
             Snackbar.make(fromTV, it, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         })
-        advertsViewModel.cities.observe(this, Observer {
+        advertsViewModel.cities.observe(viewLifecycleOwner, Observer {
             initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
         })
-        advertsViewModel.advertsLoadedEvent.observe(this,EventObserver{
+        advertsViewModel.advertsLoadedEvent.observe(viewLifecycleOwner,EventObserver{
             this.findNavController()
-                .navigate(SlideshowFragmentDirections.actionNavSlideshowToAdvertsFragment2())
+                .navigate(FindAdvertsFragmentDirections.actionNavSlideshowToAdvertsFragment2())
         })
     }
 }

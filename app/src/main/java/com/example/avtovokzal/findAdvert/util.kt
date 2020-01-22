@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.fragment_slideshow.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun SlideshowFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInKG: List<String>) {
+fun FindAdvertsFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInKG: List<String>) {
     val adapter: ArrayAdapter<String> =
         ArrayAdapter<String>(requireContext(), layoutId, citiesInKG)
     fromTV.threshold = 1;
@@ -17,7 +17,7 @@ fun SlideshowFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInK
     toTV.setAdapter(adapter)
 }
 
-fun SlideshowFragment.showSuccessDialog(it: String) {
+fun FindAdvertsFragment.showSuccessDialog(it: String) {
     MaterialAlertDialogBuilder(context)
         .setTitle(it)
         .setPositiveButton("Ok", null)
@@ -25,7 +25,7 @@ fun SlideshowFragment.showSuccessDialog(it: String) {
 }
 
 
-fun SlideshowFragment.showProgressBar(state: Boolean) {
+fun FindAdvertsFragment.showProgressBar(state: Boolean) {
     if (state) {
         progressBar2.visibility = View.VISIBLE
         fromTV.isEnabled = false
@@ -46,12 +46,12 @@ fun SlideshowFragment.showProgressBar(state: Boolean) {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun SlideshowFragment.showSelectedDate(it: Date?) {
+fun FindAdvertsFragment.showSelectedDate(it: Date?) {
     dateTV.visibility = View.VISIBLE
     dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
 }
 
-fun SlideshowFragment.showAdress(it: String) {
+fun FindAdvertsFragment.showAdress(it: String) {
 //    adressTV.visibility = View.VISIBLE
 //    adressTV.text = it
 }
