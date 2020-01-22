@@ -160,6 +160,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:$espressoVersion")
     androidTestImplementation("org.robolectric:annotations:$robolectricVersion")
     implementation("androidx.test.espresso:espresso-idling-resource:$espressoVersion")
+    androidTestImplementation ("com.agoda.kakao:kakao:2.2.0")
 
     // Resolve conflicts between main and test APK:
     androidTestImplementation("androidx.annotation:annotation:$androidXAnnotations")
@@ -167,4 +168,5 @@ dependencies {
     androidTestImplementation("androidx.recyclerview:recyclerview:$recyclerViewVersion")
     androidTestImplementation("androidx.appcompat:appcompat:$appCompatVersion")
     androidTestImplementation("com.google.android.material:material:$materialVersion")
+
 }

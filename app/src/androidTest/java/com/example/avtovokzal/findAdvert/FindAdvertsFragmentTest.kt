@@ -20,6 +20,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import com.agoda.kakao.screen.Screen
 import com.example.avtovokzal.*
 import com.example.avtovokzal.util.EspressoIdlingResource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,7 +38,7 @@ import org.robolectric.annotation.TextLayoutMode
 @MediumTest
 @RunWith(AndroidJUnit4ClassRunner::class)
 @ExperimentalCoroutinesApi
-class FindAdvertsFragmentTest{
+class FindAdvertsFragmentTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -59,22 +60,33 @@ class FindAdvertsFragmentTest{
         scenario.onFragment {
             Navigation.setViewNavController(it.view!!, navController)
         }
-        onView(ViewMatchers.withId(R.id.fromTV)).perform(ViewActions.replaceText("кочкор"))
-        onView(ViewMatchers.withId(R.id.toTV)).perform(ViewActions.replaceText("балыкчы"))
+        Screen.onScreen<FindAdvertsScreen> {
+            fromTV.replaceText("кочкор")
+            toTV.replaceText("балыкчы")
+            calendarButton.click()
 
-        onView(ViewMatchers.withId(R.id.calendarBtn)).perform(click())
+            datePickerDialog {
+                datePicker {
+                    setDate(2012, 12, 12)
+                    hasDate(2012, 12, 12)
+                }
+                okButton {
+                    click()
+                }
+            }
 
-        onView(withClassName(Matchers.equalTo(DatePicker::class.java.name)))
-            .perform(PickerActions.setDate(12, 12, 12))
-
-        onView(ViewMatchers.withId(android.R.id.button1)).perform(click())
-
-        onView(withClassName(Matchers.equalTo(TimePicker::class.java.name)))
-            .perform(PickerActions.setTime(12, 12))
-
-        onView(ViewMatchers.withId(android.R.id.button1)).perform(click())
-
-        onView(ViewMatchers.withId(R.id.dateTV))
-            .check(ViewAssertions.matches(ViewMatchers.withText("12 дек. 12 12:12 ")))
+            timePickerDialog {
+                timePicker {
+                    setTime(12, 12)
+                    hasTime(12, 12)
+                }
+                okButton {
+                    click()
+                }
+            }
+            dateTV {
+                hasText("12 дек. 12 12:12 ")
+            }
+        }
     }
 }
