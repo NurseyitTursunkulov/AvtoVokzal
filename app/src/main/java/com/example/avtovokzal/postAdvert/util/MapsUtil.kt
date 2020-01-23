@@ -1,6 +1,7 @@
 package com.example.avtovokzal.postAdvert.util
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -33,6 +34,7 @@ import kotlin.coroutines.resumeWithException
 
 val MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2
 
+@SuppressLint("MissingPermission")
 fun MapsFragment.displayOnMap(
     googleMap: GoogleMap?,
     location: Location,
@@ -110,6 +112,7 @@ private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): Bitm
     }
 }
 
+@SuppressLint("MissingPermission")
 suspend fun MapsFragment.requestLocation()=
     suspendCancellableCoroutine{ continuation : CancellableContinuation<Location?> ->
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -134,7 +137,7 @@ fun MapsFragment.checkLocationPermission(onGranted: () -> Unit){
 
  fun MapsFragment.navigateToGalleryFragment(view: View) {
     NavHostFragment.findNavController(this)
-        .navigate(MapsFragmentDirections.actionMapsFragmentToNavGallery())
+        .navigate(MapsFragmentDirections.actionMapsFragmentToNavPostadvert())
 
     val controller = Navigation.findNavController(view)
     controller.popBackStack(R.id.mapsFragment, true)

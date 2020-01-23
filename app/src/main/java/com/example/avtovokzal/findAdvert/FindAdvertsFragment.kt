@@ -65,7 +65,7 @@ class FindAdvertsFragment : Fragment() {
         })
         advertsViewModel.advertsLoadedEvent.observe(viewLifecycleOwner,EventObserver{
             this.findNavController()
-                .navigate(FindAdvertsFragmentDirections.actionNavSlideshowToAdvertsFragment2())
+                .navigate(FindAdvertsFragmentDirections.actionNavFindadvertToAdvertsFragment2())
         })
     }
 }

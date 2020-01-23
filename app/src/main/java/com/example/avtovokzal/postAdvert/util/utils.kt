@@ -74,7 +74,7 @@ fun PostAdvertFragment.checkCameraPermission(onGranted: () -> Unit) {
 
 fun PostAdvertFragment.navigateToMaps() {
     NavHostFragment.findNavController(this)
-        .navigate(PostAdvertFragmentDirections.actionNavGalleryToMapsFragment())
+        .navigate(PostAdvertFragmentDirections.actionNavFindadvertToMapsFragment())
 }
 
 

@@ -94,7 +94,7 @@ class FindAdvertsFragmentTest {
                 click()
             }
             Mockito.verify(navController).navigate(
-                FindAdvertsFragmentDirections.actionNavSlideshowToAdvertsFragment2(
+                FindAdvertsFragmentDirections.actionNavFindadvertToAdvertsFragment2(
                 )
             )
         }

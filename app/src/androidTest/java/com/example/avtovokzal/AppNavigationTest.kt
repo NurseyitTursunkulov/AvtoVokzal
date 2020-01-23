@@ -92,7 +92,7 @@ class AppNavigationTest {
 
         // Start statistics screen.
         onView(withId(R.id.nav_view))
-            .perform(navigateTo(R.id.nav_gallery))
+            .perform(navigateTo(R.id.nav_post_advert))
 
         // Check that Tasks Activity was opened.
         onView(withId(R.id.fromTV)).check(matches(isDisplayed()))
@@ -102,7 +102,7 @@ class AppNavigationTest {
             .perform(open()) // Open Drawer
 
         onView(withId(R.id.nav_view))
-            .perform(navigateTo(R.id.nav_slideshow))
+            .perform(navigateTo(R.id.nav_find_adverts))
 
         // Check that Tasks Activity was opened.
         onView(withId(R.id.fromTV)).check(matches(isDisplayed()))
