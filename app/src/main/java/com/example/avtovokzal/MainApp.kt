@@ -7,7 +7,7 @@ import com.example.avtovokzal.core.domain.findAdd.FindingAdverts
 import com.example.avtovokzal.core.domain.findAdd.FindingAdvertsImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendAdvertImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
-import com.example.avtovokzal.postAdvert.GalleryViewModel
+import com.example.avtovokzal.postAdvert.PostAdvertViewModel
 import com.example.avtovokzal.findAdvert.AdvertsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -45,7 +45,7 @@ val myModule: Module = module {
     // ViewModel instance of MyViewModel
     // get() will resolve Repository instance
     viewModel {
-        GalleryViewModel(
+        PostAdvertViewModel(
             sendAdvert = get(),
             gettingCities = get()
         )

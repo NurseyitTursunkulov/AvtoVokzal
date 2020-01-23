@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.avtovokzal
+package com.example.avtovokzal.util
 
 
 import android.view.View

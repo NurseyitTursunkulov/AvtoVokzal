@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class MapsFragment : Fragment() {
 
     internal var mapFragment: SupportMapFragment? = null
-    val galleryViewModel: GalleryViewModel by sharedViewModel()
+    val postAdvertViewModel: PostAdvertViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,11 +52,11 @@ class MapsFragment : Fragment() {
             location?.let { location ->
                 displayOnMap(map, location,
                     onNewLocationSelected = { newLocation ->
-                        galleryViewModel.advertModel.location
+                        postAdvertViewModel.advertModel.location
                             .postValue(LatLng(newLocation.latitude, newLocation.longitude))
 
                         getAdress(newLocation)?.let { address ->
-                            galleryViewModel.advertModel.address.postValue(Event(address))
+                            postAdvertViewModel.advertModel.address.postValue(Event(address))
                         }
                     }
                 )

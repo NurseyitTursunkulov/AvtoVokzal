@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-class GalleryViewModel(val sendAdvert: SendingAdvert, val gettingCities : Cities) : ViewModel() {
+class PostAdvertViewModel(val sendAdvert: SendingAdvert, val gettingCities : Cities) : ViewModel() {
     private val _snackBar = MutableLiveData<Event<String>>()
     val snackBar = _snackBar
     private val _dialog = MutableLiveData<Event<String>>()

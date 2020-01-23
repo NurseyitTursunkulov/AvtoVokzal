@@ -19,9 +19,9 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 import com.example.avtovokzal.R as T
 
 
-class GalleryFragment : Fragment() {
+class PostAdvertFragment : Fragment() {
 
-    private val galleryViewModel: GalleryViewModel by sharedViewModel()
+    private val postAdvertViewModel: PostAdvertViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ class GalleryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = inflate<FragmentGalleryBinding>(inflater, T.layout.fragment_gallery, container, false)
-        binding.viewModel = galleryViewModel
+        binding.viewModel = postAdvertViewModel
         return binding.root
     }
 
@@ -38,28 +38,28 @@ class GalleryFragment : Fragment() {
         calendarBtn.setOnClickListener {
             selectTime(
                 ontimeSelected = { year: Int, month: Int, day: Int, hour: Int, min: Int ->
-                    galleryViewModel.onTimeSelected(year,month,day,hour,min)
+                    postAdvertViewModel.onTimeSelected(year,month,day,hour,min)
                 }
             )
         }
 
-        galleryViewModel.dialog.observe(this,EventObserver{
+        postAdvertViewModel.dialog.observe(viewLifecycleOwner,EventObserver{
              showSuccessDialog(it);
         })
-        galleryViewModel.spinner.observe(this,Observer{state:Boolean->
+        postAdvertViewModel.spinner.observe(viewLifecycleOwner,Observer{ state:Boolean->
             showProgressBar(state)
         })
-        galleryViewModel.advertModel.date.observe(this, Observer {
+        postAdvertViewModel.advertModel.date.observe(viewLifecycleOwner, Observer {
             showSelectedDate(it)
         })
-        galleryViewModel.advertModel.address.observe(this, EventObserver {
+        postAdvertViewModel.advertModel.address.observe(viewLifecycleOwner, EventObserver {
             showAdress(it)
         })
-        galleryViewModel.snackBar.observe(this,EventObserver{
+        postAdvertViewModel.snackBar.observe(viewLifecycleOwner,EventObserver{
             Snackbar.make(fromTV, it, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         })
-        galleryViewModel.cities.observe(this, Observer {
+        postAdvertViewModel.cities.observe(viewLifecycleOwner, Observer {
             initAutoCompleteTextViewForCities( R.layout.select_dialog_singlechoice, it)
         })
     }

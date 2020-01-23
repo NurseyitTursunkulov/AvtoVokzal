@@ -30,7 +30,9 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.example.avtovokzal.util.DataBindingIdlingResource
 import com.example.avtovokzal.util.EspressoIdlingResource
+import com.example.avtovokzal.util.monitorActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -45,7 +47,8 @@ import org.junit.runner.RunWith
 class AppNavigationTest {
 
     // An Idling Resource that waits for Data Binding to have no pending bindings
-    private val dataBindingIdlingResource = DataBindingIdlingResource()
+    private val dataBindingIdlingResource =
+        DataBindingIdlingResource()
 
     /**
      * Idling resources tell Espresso that the app is idle or busy. This is needed when operations

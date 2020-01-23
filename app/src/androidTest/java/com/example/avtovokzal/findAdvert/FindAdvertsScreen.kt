@@ -14,6 +14,7 @@ class FindAdvertsScreen : Screen<FindAdvertsScreen>(){
     val toTV = KEditText { withId(R.id.toTV) }
     val calendarButton = KButton{withId(R.id.calendarBtn)}
     val dateTV = KTextView{withId(R.id.dateTV)}
+    val publicateButton = KButton{withId(R.id.publicate_button)}
     val datePickerDialog: KDatePickerDialog = KDatePickerDialog()
     val timePickerDialog: KTimePickerDialog = KTimePickerDialog()
 }

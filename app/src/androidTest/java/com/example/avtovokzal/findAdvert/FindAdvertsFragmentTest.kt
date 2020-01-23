@@ -1,5 +1,6 @@
 package com.example.avtovokzal.findAdvert
 
+import android.content.Context
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -7,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
@@ -61,8 +63,8 @@ class FindAdvertsFragmentTest {
             Navigation.setViewNavController(it.view!!, navController)
         }
         Screen.onScreen<FindAdvertsScreen> {
-            fromTV.replaceText("кочкор")
-            toTV.replaceText("балыкчы")
+            fromTV.replaceText("Кочкор")
+            toTV.replaceText("Балыкчы")
             calendarButton.click()
 
             datePickerDialog {
@@ -87,6 +89,14 @@ class FindAdvertsFragmentTest {
             dateTV {
                 hasText("12 дек. 12 12:12 ")
             }
+
+            publicateButton {
+                click()
+            }
+            Mockito.verify(navController).navigate(
+                FindAdvertsFragmentDirections.actionNavSlideshowToAdvertsFragment2(
+                )
+            )
         }
     }
 }

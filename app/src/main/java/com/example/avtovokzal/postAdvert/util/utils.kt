@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.example.avtovokzal.postAdvert.GalleryFragment
-import com.example.avtovokzal.postAdvert.GalleryFragmentDirections
+import com.example.avtovokzal.postAdvert.PostAdvertFragment
+import com.example.avtovokzal.postAdvert.PostAdvertFragmentDirections
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.checkPermission
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -61,7 +61,7 @@ inline fun Fragment.selectTime(crossinline ontimeSelected: (year: Int, month: In
     datapicker.show()
 }
 
-fun GalleryFragment.checkCameraPermission(onGranted: () -> Unit) {
+fun PostAdvertFragment.checkCameraPermission(onGranted: () -> Unit) {
     checkPermission(
         fragment = this,
         onGranted = {
@@ -72,13 +72,13 @@ fun GalleryFragment.checkCameraPermission(onGranted: () -> Unit) {
     )
 }
 
-fun GalleryFragment.navigateToMaps() {
+fun PostAdvertFragment.navigateToMaps() {
     NavHostFragment.findNavController(this)
-        .navigate(GalleryFragmentDirections.actionNavGalleryToMapsFragment())
+        .navigate(PostAdvertFragmentDirections.actionNavGalleryToMapsFragment())
 }
 
 
-fun GalleryFragment.showSuccessDialog(it: String) {
+fun PostAdvertFragment.showSuccessDialog(it: String) {
     MaterialAlertDialogBuilder(context)
         .setTitle(it)
         .setPositiveButton("Ok", null)
@@ -86,7 +86,7 @@ fun GalleryFragment.showSuccessDialog(it: String) {
 }
 
 
-fun GalleryFragment.showProgressBar(state: Boolean) {
+fun PostAdvertFragment.showProgressBar(state: Boolean) {
     if (state) {
         progressBar2.visibility = View.VISIBLE
         fromTV.isEnabled = false
@@ -107,18 +107,18 @@ fun GalleryFragment.showProgressBar(state: Boolean) {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun GalleryFragment.showSelectedDate(it: Date?) {
+fun PostAdvertFragment.showSelectedDate(it: Date?) {
     dateTV.visibility = View.VISIBLE
     dateTV.text = SimpleDateFormat("dd MMM yy HH:mm ").format(it)
 }
 
-fun GalleryFragment.showAdress(it: String) {
+fun PostAdvertFragment.showAdress(it: String) {
 //    adressTV.visibility = View.VISIBLE
 //    adressTV.text = it
 }
 
 
-fun GalleryFragment.dispatchTakePictureIntent() {
+fun PostAdvertFragment.dispatchTakePictureIntent() {
     Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
         takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -127,7 +127,7 @@ fun GalleryFragment.dispatchTakePictureIntent() {
 }
 
 
-fun GalleryFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInKG: List<String>) {
+fun PostAdvertFragment.initAutoCompleteTextViewForCities(layoutId: Int, citiesInKG: List<String>) {
     val adapter: ArrayAdapter<String> =
         ArrayAdapter<String>(requireContext(), layoutId, citiesInKG)
     fromTV.threshold = 1;
