@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/advertsFragment2">
 
     <fragment
         android:id="@+id/nav_home"
@@ -75,5 +75,13 @@
             app:destination="@id/nav_home"
             app:popUpTo="@+id/nav_home"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_advertsFragment2_to_advertDetailFragment"
+            app:destination="@id/advertDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/advertDetailFragment"
+        android:name="com.example.avtovokzal.AdvertDetailFragment"
+        android:label="fragment_advert_detail"
+        tools:layout="@layout/fragment_advert_detail" />
 </navigation>

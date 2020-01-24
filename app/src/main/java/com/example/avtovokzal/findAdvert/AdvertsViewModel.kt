@@ -41,8 +41,21 @@ class AdvertsViewModel(
     private val _items = MutableLiveData<List<AdvertModel>>().apply { value = emptyList() }
     val items: LiveData<List<AdvertModel>> = _items
 
+    private val _advertClickedEvent = MutableLiveData<Event<AdvertModel>>()
+    val advertClickedEvent: LiveData<Event<AdvertModel>> = _advertClickedEvent
+
     init {
         getCities()
+        launchDataLoad {
+            val res = findingAdverts.findAdd("Кочкор", "Балыкчы", Date())
+            if (res is Result.Success) {
+
+//                _advertsLoadedEvent.postValue(Event(res.data))
+                _items.postValue(res.data)
+            } else {
+                _dialog.postValue(Event("произошла ошибка"))
+            }
+        }
     }
 
     private fun getCities() {
@@ -62,16 +75,16 @@ class AdvertsViewModel(
         advertModel.date.postValue(Date(year, month, day, hour, min))
     }
 
+    fun onAdvertClicked(advertModel: AdvertModel) {
+        _advertClickedEvent.postValue(Event(advertModel))
+    }
+
     fun findAdd() {
         if (validateInputs())
             launchDataLoad {
                 tripleNullCheck(advertModel) { fromCityV: String, toCityV: String, dateV: Date ->
                     val res = findingAdverts.findAdd(fromCityV, toCityV, dateV)
                     if (res is Result.Success) {
-                        Log.d("Nurs", "result = ${res.data}")
-                        res.data.forEach {
-                            Log.d("Nurs", "result each = ${it}")
-                        }
                         _advertsLoadedEvent.postValue(Event(res.data))
                         _items.postValue(res.data)
                     } else {
@@ -95,16 +108,16 @@ class AdvertsViewModel(
 
     private fun launchDataLoad(block: suspend () -> Unit): Job {
         EspressoIdlingResource.increment()
-            return viewModelScope.launch {
-                try {
-                    _spinner.value = true
-                    block()
-                } catch (error: Error) {
-                    _snackBar.value = Event(error.toString())
-                } finally {
-                    EspressoIdlingResource.decrement()
-                    _spinner.value = false
-                }
+        return viewModelScope.launch {
+            try {
+                _spinner.value = true
+                block()
+            } catch (error: Error) {
+                _snackBar.value = Event(error.toString())
+            } finally {
+                EspressoIdlingResource.decrement()
+                _spinner.value = false
             }
+        }
     }
 }

@@ -8,7 +8,7 @@
         <import type="android.widget.CompoundButton" />
 
         <variable
-            name="task"
+            name="advertModel"
             type="com.example.avtovokzal.core.domain.AdvertModel" />
 
         <variable
@@ -18,6 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:onClick="@{() -> viewmodel.onAdvertClicked(advertModel)}"
         android:layout_height="35dp">
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:textSize="@dimen/text_view_size"
-            app:date="@{task.date}"
+            app:date="@{advertModel.date}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
-            app:price="@{task}"
+            app:price="@{advertModel}"
             tools:text="@string/textview" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -74,7 +75,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            app:time="@{task.date}"
+            app:time="@{advertModel.date}"
             android:textSize="@dimen/text_view_size"
             tools:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs")
     kotlin("android.extensions")
     id("kotlin-android-extensions")
+    id("kotlin-android")
 
 }
 android {

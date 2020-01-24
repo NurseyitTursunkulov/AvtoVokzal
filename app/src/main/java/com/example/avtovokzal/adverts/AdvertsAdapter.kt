@@ -47,7 +47,7 @@ class AdvertsAdapter(private val viewModel: AdvertsViewModel) :
         fun bind(viewModel: AdvertsViewModel, item: AdvertModel) {
 
             binding.viewmodel = viewModel
-            binding.task = item
+            binding.advertModel = item
             binding.executePendingBindings()
         }
 
