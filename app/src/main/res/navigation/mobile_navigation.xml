@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/advertDetailFragment"
-        android:name="com.example.avtovokzal.AdvertDetailFragment"
+        android:name="com.example.avtovokzal.advertDetail.AdvertDetailFragment"
         android:label="fragment_advert_detail"
         tools:layout="@layout/fragment_advert_detail" />
 </navigation>
