@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
 
         <import type="androidx.core.content.ContextCompat"/>
-        <variable name="viewModel" type="com.example.avtovokzal.findAdvert.AdvertsViewModel"/>
+        <variable name="viewModel" type="com.example.avtovokzal.AdvertsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

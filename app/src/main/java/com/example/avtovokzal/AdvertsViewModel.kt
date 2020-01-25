@@ -1,6 +1,5 @@
-package com.example.avtovokzal.findAdvert
+package com.example.avtovokzal
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import com.example.avtovokzal.core.domain.Cities
 import com.example.avtovokzal.core.domain.Result
 import com.example.avtovokzal.core.domain.findAdd.FindingAdverts
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
-import com.example.avtovokzal.postAdvert.AdvertModelPresenterLevel
 import com.example.avtovokzal.util.EspressoIdlingResource
 import com.example.avtovokzal.util.Event
 import kotlinx.coroutines.Job

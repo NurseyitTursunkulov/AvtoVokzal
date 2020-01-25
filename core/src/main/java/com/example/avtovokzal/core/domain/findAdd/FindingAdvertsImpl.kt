@@ -22,27 +22,18 @@ class FindingAdvertsImpl : FindingAdverts {
         db.collection("adverts").document("$fromCity-$toCity")
             .get().addOnSuccessListener { documentSnapshot ->
                 val advertModel = documentSnapshot.toObject(AdvertModel::class.java)
-                Log.w(
-                    "Nurs", "Error adding document " +
-                            "${advertModel}"
-                )
                 if (advertModel != null)
                     list.add(advertModel as AdvertModel)
 //                result = Result.Success(arrayListOf(advertModel) as ArrayList<AdvertModel>)
             }
             .addOnFailureListener { e ->
                 result = Result.Error(e)
-                Log.w("Nurs", "Error adding document", e)
             }
             .await()
         db.collection("adverts").document("$fromCity-$toCity")
             .collection("companion").get().addOnSuccessListener { documentSnapshot ->
                 documentSnapshot.documents.forEach {
                     val advertModel = it.toObject(AdvertModel::class.java)
-                    Log.w(
-                        "Nurs", "audi document " +
-                                "${advertModel}"
-                    )
                     if (advertModel != null)
                         list.add(advertModel as AdvertModel)
 //                    result = Result.Success(listOf(advertModel) as List<AdvertModel>)
@@ -51,7 +42,6 @@ class FindingAdvertsImpl : FindingAdverts {
             }
             .addOnFailureListener { e ->
                 result = Result.Error(e)
-                Log.w("Nurs", "Error adding document", e)
             }
             .await()
         if (list.isNotEmpty()) result = Result.Success(list)

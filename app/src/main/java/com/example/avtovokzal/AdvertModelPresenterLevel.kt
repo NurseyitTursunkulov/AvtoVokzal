@@ -1,4 +1,4 @@
-package com.example.avtovokzal.postAdvert
+package com.example.avtovokzal
 
 import androidx.lifecycle.MutableLiveData
 import com.example.avtovokzal.core.domain.AdvertModel

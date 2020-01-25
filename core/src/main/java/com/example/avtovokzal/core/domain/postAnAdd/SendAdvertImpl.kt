@@ -18,11 +18,9 @@ class SendAdvertImpl() :
                 .add(advertModel)
                 .addOnSuccessListener { documentReference ->
                     result = Result.Success(Unit)
-                    Log.d("Nurs", "DocumentSnapshot added with ID: ${documentReference}")
                 }
                 .addOnFailureListener { e ->
                     result = Result.Error(e)
-                    Log.w("Nurs", "Error adding document", e)
                 }
                 .await()
 //        db.collection("users")

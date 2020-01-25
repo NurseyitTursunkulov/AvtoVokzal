@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.avtovokzal.AdvertModelPresenterLevel
 import com.example.avtovokzal.core.domain.Cities
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
 import com.example.avtovokzal.core.domain.Result

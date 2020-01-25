@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avtovokzal.core.domain.AdvertModel
 import com.example.avtovokzal.databinding.AdvertItemBinding
-import com.example.avtovokzal.findAdvert.AdvertsViewModel
+import com.example.avtovokzal.AdvertsViewModel
 
 /**
  * Adapter for the task list. Has a reference to the [TasksViewModel] to send actions back to it.

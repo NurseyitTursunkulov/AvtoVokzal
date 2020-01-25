@@ -23,7 +23,6 @@ class CitiesImpl : Cities {
         }
             .addOnFailureListener { e ->
                 result = Result.Error(e)
-                Log.w("Nurs", "Error adding document", e)
             }
             .await()
         return result

@@ -8,7 +8,6 @@ import com.example.avtovokzal.core.domain.findAdd.FindingAdvertsImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendAdvertImpl
 import com.example.avtovokzal.core.domain.postAnAdd.SendingAdvert
 import com.example.avtovokzal.postAdvert.PostAdvertViewModel
-import com.example.avtovokzal.findAdvert.AdvertsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -54,7 +53,8 @@ val myModule: Module = module {
         AdvertsViewModel(
             sendAdvert = get(),
             gettingCities = get(),
-            findingAdverts = get())
+            findingAdverts = get()
+        )
     }
     single<FindingAdverts>{FindingAdvertsImpl()}
     single<SendingAdvert> { SendAdvertImpl() }

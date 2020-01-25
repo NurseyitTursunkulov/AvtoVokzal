@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.avtovokzal.findAdvert.AdvertsViewModel" />
+            type="com.example.avtovokzal.AdvertsViewModel" />
 
     </data>
 

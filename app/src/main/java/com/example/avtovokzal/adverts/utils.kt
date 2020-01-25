@@ -6,8 +6,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.avtovokzal.databinding.FragmentAdvertsBinding
-import com.example.avtovokzal.findAdvert.AdvertsViewModel
-import com.example.avtovokzal.postAdvert.AdvertModelPresenterLevel
+import com.example.avtovokzal.AdvertsViewModel
+import com.example.avtovokzal.AdvertModelPresenterLevel
 import kotlinx.android.synthetic.main.app_bar_main.*
 import java.util.*
 
